@@ -1091,6 +1091,96 @@
             transform: translateY(-3px);
         }
 
+        /* ===== INSTAGRAM-STYLE GALLERY MOBILE OPTIMIZATION ===== */
+        @media (max-width: 768px) {
+            /* Instagram-like grid - 3 columns, no gaps */
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 0 !important;
+            }
+            
+            /* Square items */
+            .gallery-item {
+                aspect-ratio: 1 !important;
+                width: 100% !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+            }
+            
+            /* Remove all shadows and borders for clean look */
+            .gallery-item img {
+                border-radius: 0 !important;
+                transition: transform 0.2s ease !important;
+            }
+            
+            /* Instagram-like tap feedback */
+            .gallery-item:active img {
+                transform: scale(0.95) !important;
+                opacity: 0.9 !important;
+            }
+            
+            /* Category dropdown mobile optimization */
+            .category-toggle {
+                position: fixed !important;
+                top: 80px !important;
+                left: 10px !important;
+                right: 10px !important;
+                width: calc(100% - 20px) !important;
+                max-width: none !important;
+                z-index: 1000 !important;
+                background: var(--accent) !important;
+                border: none !important;
+                box-shadow: 0 4px 20px rgba(233, 69, 96, 0.3) !important;
+            }
+            
+            .category-selector {
+                top: 140px !important;
+                left: 10px !important;
+                right: 10px !important;
+                width: calc(100% - 20px) !important;
+                max-width: none !important;
+                max-height: 60vh !important;
+            }
+            
+            /* Gallery section spacing */
+            .gallery-section {
+                padding: 30px 10px !important;
+                scroll-margin-top: 130px !important;
+            }
+            
+            .gallery-section h2 {
+                font-size: 1.3rem !important;
+                margin-bottom: 5px !important;
+            }
+            
+            .gallery-section p {
+                font-size: 0.8rem !important;
+                opacity: 0.7 !important;
+            }
+        }
+
+        /* Instagram-like hover effect for desktop */
+        @media (min-width: 769px) {
+            .gallery-item {
+                transition: transform 0.3s ease !important;
+            }
+            
+            .gallery-item:hover {
+                transform: scale(1.02) !important;
+                z-index: 1 !important;
+            }
+            
+            .gallery-item:hover img {
+                opacity: 0.9 !important;
+            }
+        }
+
+        /* Loading skeleton animation */
+        @keyframes loading {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
         /* ===== GALLERY PAGE - COMPLETELY REDESIGNED ===== */
         #gallery-page {
             background: var(--white);
@@ -1363,6 +1453,174 @@
 
         .gallery-item img.loaded ~ .gallery-item::before {
             display: none;
+        }
+
+        /* ===== GALLERY MODAL POPUP ===== */
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 95%;
+            max-width: 1200px;
+            height: 90vh;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 2001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .modal-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 2001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        .modal-nav-btn:hover {
+            background: var(--accent);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-image-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            color: white;
+            padding: 30px 20px 20px;
+            text-align: center;
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .modal-counter {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Mobile modal styles */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 100%;
+                height: 100vh;
+            }
+            
+            .modal-close {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .modal-nav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                top: auto;
+                transform: none;
+            }
+            
+            .modal-prev {
+                left: 20px;
+            }
+            
+            .modal-next {
+                right: 20px;
+            }
+            
+            .modal-info {
+                padding: 20px 15px 15px;
+            }
+            
+            .modal-title {
+                font-size: 1rem;
+            }
         }
 
         /* ===== CONTACT PAGE ===== */
@@ -2084,10 +2342,11 @@
             <section class="section">
                 <div class="container">
                     <div class="text-center mb-4">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                        <img src="sai profile.jpg" 
                              alt="Sai Kumar Maddina - Professional Photographer" 
                              class="profile-image"
-                             loading="lazy">
+                             loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
                     </div>
                     
                     <div>
@@ -2445,10 +2704,10 @@
             { class: "clapboard", icon: "fas fa-clapperboard", name: "Clapboard", animation: "" }
         ];
         
-        const iconsPerType = 6; // Increased from 5 to 6 for more icons
+        const iconsPerType = 6;
         const totalIcons = photographyIcons.length * iconsPerType;
-        const gridCols = 10; // Increased from 8 to 10 for more density
-        const gridRows = 6; // Increased from 5 to 6 for more density
+        const gridCols = 10;
+        const gridRows = 6;
         const cellWidth = 100 / gridCols;
         const cellHeight = 100 / gridRows;
         const usedPositions = new Set();
@@ -2486,17 +2745,17 @@
                         icon.classList.add(iconType.animation);
                     }
                     
-                    const randomOffsetX = (Math.random() - 0.5) * (cellWidth * 0.6); // Increased randomness
-                    const randomOffsetY = (Math.random() - 0.5) * (cellHeight * 0.6); // Increased randomness
+                    const randomOffsetX = (Math.random() - 0.5) * (cellWidth * 0.6);
+                    const randomOffsetY = (Math.random() - 0.5) * (cellHeight * 0.6);
                     
                     const posX = (gridPos.col * cellWidth) + (cellWidth / 2) + randomOffsetX;
                     const posY = (gridPos.row * cellHeight) + (cellHeight / 2) + randomOffsetY;
                     
-                    const size = 1.6 + Math.random() * 0.8; // Larger size range
-                    const opacity = 0.65 + Math.random() * 0.15; // Higher opacity range
-                    const grayValue = 120 + Math.random() * 50; // Darker for better visibility
+                    const size = 1.6 + Math.random() * 0.8;
+                    const opacity = 0.65 + Math.random() * 0.15;
+                    const grayValue = 120 + Math.random() * 50;
                     const color = `rgba(${grayValue}, ${grayValue}, ${grayValue}, ${opacity})`;
-                    const rotation = Math.random() * 20 - 10; // More rotation variation
+                    const rotation = Math.random() * 20 - 10;
                     const animationDelay = Math.random() * 15;
                     
                     icon.style.left = `${posX}%`;
@@ -2505,7 +2764,7 @@
                     icon.style.color = color;
                     icon.style.transform = `rotate(${rotation}deg)`;
                     icon.style.animationDelay = `${animationDelay}s`;
-                    icon.style.filter = `drop-shadow(0 2px 4px rgba(0,0,0,0.1))`; // Added shadow
+                    icon.style.filter = `drop-shadow(0 2px 4px rgba(0,0,0,0.1))`;
                     
                     container.appendChild(icon);
                 }
@@ -2600,29 +2859,29 @@
             link.addEventListener('click', closeMenu);
         });
 
-        // ===== SLIDESHOW DATA - UPDATED WITH UNSPLASH IMAGES =====
+        // ===== SLIDESHOW DATA - USING YOUR EXACT FILENAMES =====
         const slideshowData = [
             {
                 id: 1,
-                filename: "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+                filename: "homepageslideshow01.jpg",
                 alt: "Professional photography studio setup at PQ Studios",
                 title: "Our Modern Studio"
             },
             {
                 id: 2,
-                filename: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+                filename: "homepageslideshow02.jpg",
                 alt: "Food photography session with delicious dishes",
                 title: "Food Photography Excellence"
             },
             {
                 id: 3,
-                filename: "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+                filename: "homepageslideshow03.jpg",
                 alt: "Product photography setup with professional lighting",
                 title: "Product Photography"
             },
             {
                 id: 4,
-                filename: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+                filename: "homepageslideshow04.jpg",
                 alt: "Fashion photography shoot with professional models",
                 title: "Fashion & Lifestyle"
             }
@@ -2650,14 +2909,15 @@
                 
                 // Create image element
                 const img = document.createElement('img');
-                img.src = slide.filename; // Use the Unsplash URL directly
+                img.src = slide.filename;
                 img.alt = slide.alt;
                 img.loading = "lazy";
                 
                 // Add fallback if image fails to load
                 img.onerror = function() {
+                    console.error('Failed to load slideshow image:', slide.filename);
                     this.src = 'https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';
-                    this.alt = 'Image loading error';
+                    this.alt = 'Image failed to load: ' + slide.filename;
                 };
                 
                 slideElement.appendChild(img);
@@ -2707,7 +2967,7 @@
             
             slideshowInterval = setInterval(() => {
                 nextSlide();
-            }, 5000); // Change slide every 5 seconds
+            }, 5000);
         }
 
         function pauseSlideshow() {
@@ -2932,7 +3192,7 @@
             });
         }
 
-        // ===== NEW GALLERY PAGE FUNCTIONALITY =====
+        // ===== GALLERY PAGE FUNCTIONALITY =====
         const galleryCategories = [
             { 
                 id: 'food', 
@@ -2977,6 +3237,17 @@
                 icon: 'fas fa-camera'
             }
         ];
+
+        // Category to filename mapping - EXACTLY as in your document
+        const categoryFilePatterns = {
+            'food': 'food photography',
+            'product': 'product photography', 
+            'ecommerce': 'ecommerce visuals',
+            'fashion': 'fashion lifestyle',
+            'pets': 'pet photography',
+            'interiors': 'interiors architecture',
+            'studio': 'studio shots'
+        };
 
         // ===== CATEGORY DROPDOWN =====
         const categoryToggle = document.getElementById('categoryToggle');
@@ -3101,61 +3372,10 @@
 
             grid.innerHTML = '';
             
-            // Generate image filenames based on your requirements
-            function generateImageFilenames(categoryId, count) {
-                const categoryNames = {
-                    'food': 'food photography',
-                    'product': 'product photography',
-                    'ecommerce': 'e-commerce visuals',
-                    'fashion': 'fashion lifestyle',
-                    'pets': 'pet photography',
-                    'interiors': 'interiors architecture',
-                    'studio': 'studio shots'
-                };
-                
-                const baseName = categoryNames[categoryId];
-                const filenames = [];
-                
-                for (let i = 1; i <= count; i++) {
-                    filenames.push(`${baseName} ${i}.jpg`);
-                }
-                
-                return filenames;
-            }
+            const baseName = categoryFilePatterns[categoryId];
             
-            const imageFilenames = generateImageFilenames(categoryId, count);
-            
-            // Predefined Unsplash images for each category
-            const unsplashCategories = {
-                'food': [
-                    'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80',
-                    'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80',
-                    'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80'
-                ],
-                'product': [
-                    'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&q=80',
-                    'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=800&q=80',
-                    'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80'
-                ],
-                'fashion': [
-                    'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?w=800&q=80',
-                    'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80',
-                    'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80'
-                ]
-            };
-            
-            // Default images if category not found
-            const defaultImages = [
-                'https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=800&q=80',
-                'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80',
-                'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800&q=80'
-            ];
-            
-            const categoryImages = unsplashCategories[categoryId] || defaultImages;
-            
-            for (let i = 0; i < count; i++) {
-                const filename = imageFilenames[i];
-                const imageIndex = i % categoryImages.length;
+            for (let i = 1; i <= count; i++) {
+                const filename = `${baseName} ${i}.jpg`;
                 
                 const galleryItem = document.createElement('div');
                 galleryItem.className = 'gallery-item';
@@ -3164,23 +3384,24 @@
                 galleryItem.setAttribute('aria-label', `View ${filename}`);
                 
                 galleryItem.innerHTML = `
-                    <img src="${categoryImages[imageIndex]}" 
+                    <img src="${filename}" 
                          alt="${filename}"
                          data-filename="${filename}"
                          loading="lazy"
                          width="400"
                          height="400"
-                         data-index="${i}">
+                         data-index="${i-1}"
+                         onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\"width:100%;height:100%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:12px;padding:10px;text-align:center;\">Image ${i}<br>${baseName}</div>'">
                 `;
                 
                 galleryItem.addEventListener('click', () => {
-                    openGalleryPopup(categoryId, i);
+                    openGalleryPopup(categoryId, i-1);
                 });
                 
                 galleryItem.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
-                        openGalleryPopup(categoryId, i);
+                        openGalleryPopup(categoryId, i-1);
                     }
                 });
                 
@@ -3231,8 +3452,8 @@
         let currentGalleryImages = [];
         let currentImageIndex = 0;
         let currentCategoryId = '';
-        let touchStartX = 0;
-        let touchEndX = 0;
+        let modalTouchStartX = 0;
+        let modalTouchEndX = 0;
 
         function initGalleryModal() {
             if (!galleryModal || !modalClose) return;
@@ -3252,8 +3473,8 @@
             document.addEventListener('keydown', handleKeyboardNavigation);
 
             // Touch swipe for mobile
-            modalImage.addEventListener('touchstart', handleTouchStart, { passive: true });
-            modalImage.addEventListener('touchend', handleTouchEnd, { passive: true });
+            modalImage.addEventListener('touchstart', handleModalTouchStart, { passive: true });
+            modalImage.addEventListener('touchend', handleModalTouchEnd, { passive: true });
 
             // Close modal when clicking outside image (on mobile)
             galleryModal.addEventListener('click', (e) => {
@@ -3263,18 +3484,18 @@
             });
         }
 
-        function handleTouchStart(e) {
-            touchStartX = e.changedTouches[0].screenX;
+        function handleModalTouchStart(e) {
+            modalTouchStartX = e.changedTouches[0].screenX;
         }
 
-        function handleTouchEnd(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
+        function handleModalTouchEnd(e) {
+            modalTouchEndX = e.changedTouches[0].screenX;
+            handleModalSwipe();
         }
 
-        function handleSwipe() {
+        function handleModalSwipe() {
             const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
+            const diff = modalTouchStartX - modalTouchEndX;
 
             if (Math.abs(diff) > swipeThreshold) {
                 if (diff > 0) {
@@ -3393,7 +3614,7 @@
             }
         }
 
-        // ===== FEATURED WORK - UPDATED WITH UNSPLASH IMAGES =====
+        // ===== FEATURED WORK =====
         const featuredGrid = document.getElementById('featuredGrid');
 
         function loadFeaturedWork() {
@@ -3402,22 +3623,22 @@
             const featuredImages = [
                 { 
                     category: 'food', 
-                    image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    title: 'Gourmet Burger'
+                    image: "featured01.jpg",
+                    title: 'Gourmet Food Photography'
                 },
                 { 
                     category: 'product', 
-                    image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    title: 'Tech Product'
+                    image: "featured02.jpg",
+                    title: 'Product Photography'
                 },
                 { 
                     category: 'fashion', 
-                    image: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    image: "featured03.jpg",
                     title: 'Fashion Shoot'
                 },
                 { 
                     category: 'pets', 
-                    image: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    image: "featured04.jpg",
                     title: 'Pet Portrait'
                 }
             ];
@@ -3439,7 +3660,8 @@
                          alt="${item.title}" 
                          loading="lazy"
                          width="400"
-                         height="400">
+                         height="400"
+                         onerror="this.src='https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=400&q=80'; this.alt='Fallback image'">
                 `;
                 featuredGrid.appendChild(featuredItem);
             });
@@ -3448,74 +3670,46 @@
         // ===== CLIENTS SECTION =====
         const clientsTrack = document.getElementById('clientsTrack');
 
-        // UPDATED CLIENT LOGOS DATA - 12 LOGOS
-        const clientBrands = [
-            { name: "Client Logo 1", filename: "client logos 1.jpg", color: "#FC8019" },
-            { name: "Client Logo 2", filename: "client logos 2.jpg", color: "#000000" },
-            { name: "Client Logo 3", filename: "client logos 3.jpg", color: "#FF9900" },
-            { name: "Client Logo 4", filename: "client logos 4.jpg", color: "#E50914" },
-            { name: "Client Logo 5", filename: "client logos 5.jpg", color: "#1DB954" },
-            { name: "Client Logo 6", filename: "client logos 6.jpg", color: "#FF5A5F" },
-            { name: "Client Logo 7", filename: "client logos 7.jpg", color: "#4285F4" },
-            { name: "Client Logo 8", filename: "client logos 8.jpg", color: "#0078D4" },
-            { name: "Client Logo 9", filename: "client logos 9.jpg", color: "#3B82F6" },
-            { name: "Client Logo 10", filename: "client logos 10.jpg", color: "#10B981" },
-            { name: "Client Logo 11", filename: "client logos 11.jpg", color: "#F59E0B" },
-            { name: "Client Logo 12", filename: "client logos 12.jpg", color: "#8B5CF6" }
-        ];
-
         function loadClients() {
             if (!clientsTrack) return;
 
             clientsTrack.innerHTML = '';
 
+            // Your 12 client logos - EXACT FILENAMES
+            const clientFiles = [
+                "client logos 1.jpg",
+                "client logos 2.jpg",
+                "client logos 3.jpg",
+                "client logos 4.jpg",
+                "client logos 5.jpg",
+                "client logos 6.jpg",
+                "client logos 7.jpg",
+                "client logos 8.jpg",
+                "client logos 9.jpg",
+                "client logos 10.jpg",
+                "client logos 11.jpg",
+                "client logos 12.jpg"
+            ];
+
             // Create 3 sets for infinite scrolling effect
             for (let set = 0; set < 3; set++) {
-                clientBrands.forEach(client => {
-                    // Create SVG placeholder with the filename
-                    const svgPlaceholder = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Crect width='200' height='100' fill='${client.color.replace('#', '%23')}' rx='12'/%3E%3Ctext x='100' y='45' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-size='16' font-weight='bold'%3E${encodeURIComponent(client.name)}%3C/text%3E%3Ctext x='100' y='70' text-anchor='middle' fill='rgba(255,255,255,0.8)' font-family='Arial, sans-serif' font-size='11'%3E${encodeURIComponent(client.filename)}%3C/text%3E%3C/svg%3E`;
-                    
+                clientFiles.forEach(filename => {
                     const clientItem = document.createElement('div');
                     clientItem.className = 'client-logo-item';
-                    clientItem.setAttribute('data-client', client.filename.replace('.jpg', ''));
                     
                     clientItem.innerHTML = `
-                        <img src="${svgPlaceholder}" 
-                             alt="${client.name}" 
+                        <img src="${filename}" 
+                             alt="Client Logo" 
                              class="client-logo-img"
                              loading="lazy"
-                             width="200"
-                             height="100"
-                             data-src="images/clients/${client.filename}">
+                             width="160"
+                             height="90"
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\"width:160px;height:90px;background:#f0f0f0;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#666;font-weight:bold;\">${filename.replace('.jpg', '')}</div>'">
                     `;
                     
                     clientsTrack.appendChild(clientItem);
                 });
             }
-            
-            // Add lazy loading for client logos
-            lazyLoadClientLogos();
-        }
-
-        function lazyLoadClientLogos() {
-            const clientLogos = document.querySelectorAll('.client-logo-img[data-src]');
-            
-            const logoObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        const realSrc = img.getAttribute('data-src');
-                        
-                        // In a real scenario, you would load the actual image
-                        // For now, we'll just keep the placeholder
-                        // img.src = realSrc;
-                        
-                        logoObserver.unobserve(img);
-                    }
-                });
-            }, { rootMargin: '50px' });
-            
-            clientLogos.forEach(img => logoObserver.observe(img));
         }
 
         // ===== CONTACT FORM =====
@@ -3656,9 +3850,59 @@
             });
         }
 
+        // ===== IMAGE DEBUGGER =====
+        function debugImageLoading() {
+            console.log('🔍 Checking all images...');
+            
+            // Check slideshow images
+            console.log('📸 Slideshow Images:');
+            slideshowData.forEach(slide => {
+                const img = new Image();
+                img.onload = () => console.log(`   ✓ ${slide.filename}`);
+                img.onerror = () => console.error(`   ✗ ${slide.filename} - NOT FOUND`);
+                img.src = slide.filename;
+            });
+            
+            // Check featured images
+            console.log('⭐ Featured Images:');
+            ['featured01.jpg', 'featured02.jpg', 'featured03.jpg', 'featured04.jpg'].forEach(filename => {
+                const img = new Image();
+                img.onload = () => console.log(`   ✓ ${filename}`);
+                img.onerror = () => console.error(`   ✗ ${filename} - NOT FOUND`);
+                img.src = filename;
+            });
+            
+            // Check profile image
+            console.log('👤 Profile Image:');
+            const profileImg = new Image();
+            profileImg.onload = () => console.log(`   ✓ sai profile.jpg`);
+            profileImg.onerror = () => console.error(`   ✗ sai profile.jpg - NOT FOUND`);
+            profileImg.src = 'sai profile.jpg';
+            
+            // Check client logos
+            console.log('🏢 Client Logos:');
+            for (let i = 1; i <= 12; i++) {
+                const filename = `client logos ${i}.jpg`;
+                const img = new Image();
+                img.onload = () => console.log(`   ✓ ${filename}`);
+                img.onerror = () => console.error(`   ✗ ${filename} - NOT FOUND`);
+                img.src = filename;
+            }
+            
+            // Check gallery categories
+            console.log('🏞️ Gallery Categories:');
+            galleryCategories.forEach(category => {
+                const testFile = `${categoryFilePatterns[category.id]} 1.jpg`;
+                const img = new Image();
+                img.onload = () => console.log(`   ✓ ${category.name}: ${testFile}`);
+                img.onerror = () => console.error(`   ✗ ${category.name}: ${testFile} - NOT FOUND`);
+                img.src = testFile;
+            });
+        }
+
         // ===== INITIALIZE EVERYTHING =====
         document.addEventListener('DOMContentLoaded', function() {
-            // Generate the enhanced background - NOW VERY VISIBLE
+            // Generate the enhanced background
             generateIcons();
             
             // Initialize page
@@ -3669,8 +3913,8 @@
             
             // Load all content
             loadServices();
-            loadFeaturedWork(); // This will now show Unsplash images
-            loadClients(); // This now loads 12 logos
+            loadFeaturedWork();
+            loadClients();
             
             // Load gallery sections
             loadGallerySections();
@@ -3682,6 +3926,9 @@
             
             // Initial highlight
             setTimeout(highlightActiveCategory, 1000);
+            
+            // Run debugger
+            setTimeout(debugImageLoading, 2000);
         });
 
         function highlightActiveCategory() {
