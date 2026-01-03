@@ -628,7 +628,7 @@
         /* ===== HOME PAGE - Slideshow Hero ===== */
         .slideshow-hero {
             position: relative;
-            min-height: 85vh;
+            min-height: 100vh; /* Full height */
             display: flex;
             align-items: center;
             overflow: hidden;
@@ -681,12 +681,15 @@
             padding: 10vh 1.5rem 10vh;
             color: var(--white);
             width: 100%;
+            /* REMOVED ALL TEXT AND BUTTONS */
+            display: none;
         }
 
         .hero-title {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
             color: var(--white);
+            display: none; /* Hidden */
         }
 
         .hero-subtitle {
@@ -698,6 +701,7 @@
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            display: none; /* Hidden */
         }
 
         @media (min-width: 768px) {
@@ -706,35 +710,21 @@
             }
         }
 
-        /* Video comment section */
+        /* Video comment section - REMOVED */
         .video-comment {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 0.75rem 1.25rem;
-            border-radius: 50px;
-            margin: 1.5rem auto;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            font-size: 0.9rem;
-            max-width: 400px;
+            display: none;
         }
 
-        .video-comment i {
-            color: var(--accent);
-            font-size: 1.1rem;
-        }
-
-        /* Slideshow dots */
+        /* Slideshow dots - KEPT FOR NAVIGATION */
         .slideshow-dots {
             display: flex;
             gap: 0.75rem;
             justify-content: center;
             margin-top: 2rem;
-            position: relative;
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
             z-index: 3;
         }
 
@@ -2051,28 +2041,13 @@
                 
                 <div class="slideshow-overlay"></div>
                 
+                <!-- REMOVED ALL TEXT AND BUTTONS FROM HERO CONTENT -->
                 <div class="hero-content container">
-                    <h1 class="hero-title">Capture Life's <span class="highlight">Beautiful</span> Moments</h1>
-                    <p class="hero-subtitle">Professional photography studio specializing in food, product, fashion, and commercial photography. Creating stunning visuals that tell your story.</p>
-                    
-                    <!-- Video comment section -->
-                    <div class="video-comment">
-                        <i class="fas fa-video"></i>
-                        <span>We also create cinematic video content for your brand</span>
-                    </div>
-                    
-                    <div class="btn-group">
-                        <a href="#gallery" class="btn btn-primary btn-spacing" onclick="showPage('gallery'); return false;">
-                            <i class="fas fa-images"></i> View Gallery
-                        </a>
-                        <a href="#contact" class="btn btn-outline btn-spacing" style="color: white; border-color: white;" onclick="showPage('contact'); return false;">
-                            <i class="fas fa-calendar"></i> Book a Session
-                        </a>
-                    </div>
-                    
-                    <!-- Slideshow Navigation Dots -->
-                    <div class="slideshow-dots" id="slideshowDots"></div>
+                    <!-- Text and buttons removed as requested -->
                 </div>
+                
+                <!-- Slideshow Navigation Dots (KEPT FOR NAVIGATION) -->
+                <div class="slideshow-dots" id="slideshowDots"></div>
             </section>
 
             <!-- Featured Work Section -->
