@@ -2100,7 +2100,8 @@
                         <img src="images/profile/sai-profile.jpg" 
                              alt="Sai Kumar Maddina - Professional Photographer" 
                              class="profile-image"
-                             loading="lazy">
+                             loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80'">
                     </div>
                     
                     <div>
@@ -2603,7 +2604,7 @@
             link.addEventListener('click', closeMenu);
         });
 
-        // ===== SLIDESHOW DATA - UPDATED WITH YOUR FILE NAMES =====
+        // ===== SLIDESHOW DATA - UPDATED WITH PROPER PATHS =====
         const slideshowData = [
             {
                 id: 1,
@@ -2659,8 +2660,10 @@
                 
                 // Add fallback if image fails to load
                 img.onerror = function() {
-                    this.src = 'images/homepage/homepage-slideshow-01.jpg';
-                    this.alt = 'Image loading error';
+                    console.log('Failed to load image:', this.src);
+                    // Use a placeholder
+                    this.src = 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80';
+                    this.alt = 'Image loading - placeholder';
                 };
                 
                 slideElement.appendChild(img);
@@ -3052,7 +3055,7 @@
             };
             
             img.onerror = () => {
-                modalImage.src = 'images/homepage/homepage-slideshow-01.jpg';
+                modalImage.src = 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80';
                 modalImage.style.opacity = '1';
                 modalTitle.textContent = 'Image';
                 modalCounter.textContent = `${currentImageIndex + 1} / ${currentGalleryImages.length}`;
@@ -3129,7 +3132,7 @@
 
             grid.innerHTML = '';
             
-            // Define image paths for each category
+            // Define image paths for each category - FIXED PATHS
             const imagePaths = {
                 'food': [
                     'images/gallery/food/food-photography-01.jpg',
@@ -3244,7 +3247,8 @@
                          loading="lazy"
                          width="400"
                          height="400"
-                         data-src="${path}">
+                         data-src="${path}"
+                         onerror="this.src='https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'">
                 `;
                 
                 galleryItem.addEventListener('click', () => {
@@ -3277,7 +3281,7 @@
                         };
                         image.onerror = () => {
                             // Use placeholder if image fails to load
-                            img.src = 'images/homepage/homepage-slideshow-01.jpg';
+                            img.src = 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';
                             img.classList.add('loaded');
                             img.style.opacity = '1';
                         };
@@ -3354,7 +3358,8 @@
                          loading="lazy"
                          width="400"
                          height="400"
-                         data-src="${item.image}">
+                         data-src="${item.image}"
+                         onerror="this.src='https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'">
                 `;
                 featuredGrid.appendChild(featuredItem);
             });
@@ -3397,7 +3402,8 @@
                              class="client-logo-img"
                              loading="lazy"
                              width="200"
-                             height="100">
+                             height="100"
+                             onerror="this.src='https://via.placeholder.com/160x90/1a1a2e/ffffff?text=Client+Logo'">
                     `;
                     
                     clientsTrack.appendChild(clientItem);
@@ -3571,6 +3577,13 @@
             
             // Initialize gallery popup
             initGalleryPopup();
+            
+            // Log for debugging
+            console.log('PQ Studios Website Loaded Successfully!');
+            console.log('If images are not showing, check:');
+            console.log('1. images/ folder structure');
+            console.log('2. File names match exactly');
+            console.log('3. Browser console for 404 errors');
         });
 
         // Handle window resize
