@@ -625,8 +625,8 @@
             display: block;
         }
 
-        /* ===== HOME PAGE - Video Hero ===== */
-        .video-hero {
+        /* ===== HOME PAGE - Slideshow Hero ===== */
+        .slideshow-hero {
             position: relative;
             min-height: 85vh;
             display: flex;
@@ -634,22 +634,7 @@
             overflow: hidden;
         }
 
-        .video-hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background-image: 
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='100' viewBox='0 0 120 100'%3E%3Cpath d='M0,0 L120,0 L120,20 L60,20 L40,40 L20,20 L0,40 Z' fill='white' fill-opacity='0.05'/%3E%3Cpath d='M0,40 L120,40 L120,60 L60,60 L40,80 L20,60 L0,80 Z' fill='white' fill-opacity='0.05'/%3E%3Cpath d='M0,80 L120,80 L120,100 L60,100 L40,120 L20,100 L0,120 Z' fill='white' fill-opacity='0.05'/%3E%3C/svg%3E");
-            background-repeat: repeat-x;
-            background-position: bottom;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .video-container {
+        .slideshow-container {
             position: absolute;
             top: 0;
             left: 0;
@@ -658,20 +643,34 @@
             z-index: 1;
         }
 
-        .video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 30%;
-        }
-
-        .video-overlay {
+        .slide {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.7));
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .slideshow-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.75));
             z-index: 2;
         }
 
@@ -693,7 +692,7 @@
         .hero-subtitle {
             font-size: 1.1rem;
             opacity: 0.9;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             color: rgba(255,255,255,0.9);
             line-height: 1.7;
             max-width: 700px;
@@ -705,6 +704,58 @@
             .hero-subtitle {
                 font-size: 1.25rem !important;
             }
+        }
+
+        /* Video comment section */
+        .video-comment {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            margin: 1.5rem auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 0.9rem;
+            max-width: 400px;
+        }
+
+        .video-comment i {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        /* Slideshow dots */
+        .slideshow-dots {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .slideshow-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slideshow-dot.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            transform: scale(1.2);
+        }
+
+        .slideshow-dot:hover {
+            background: rgba(255, 255, 255, 0.6);
         }
 
         /* ===== HOME PAGE Featured Work ===== */
@@ -1993,19 +2044,23 @@
     <div class="page-content">
         <!-- HOME PAGE -->
         <div id="home-page" class="page active">
-            <section class="video-hero">
-                <div class="video-container">
-                    <video id="heroVideo" autoplay muted loop playsinline preload="metadata" aria-label="Background video of photography session">
-                        <source src="https://assets.mixkit.co/videos/preview/mixkit-wedding-photo-shoot-4839-large.mp4" type="video/mp4">
-                        <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" alt="Photography Background">
-                    </video>
+            <section class="slideshow-hero">
+                <div class="slideshow-container" id="slideshowContainer">
+                    <!-- Slides will be loaded by JavaScript -->
                 </div>
                 
-                <div class="video-overlay"></div>
+                <div class="slideshow-overlay"></div>
                 
                 <div class="hero-content container">
                     <h1 class="hero-title">Capture Life's <span class="highlight">Beautiful</span> Moments</h1>
                     <p class="hero-subtitle">Professional photography studio specializing in food, product, fashion, and commercial photography. Creating stunning visuals that tell your story.</p>
+                    
+                    <!-- Video comment section -->
+                    <div class="video-comment">
+                        <i class="fas fa-video"></i>
+                        <span>We also create cinematic video content for your brand</span>
+                    </div>
+                    
                     <div class="btn-group">
                         <a href="#gallery" class="btn btn-primary btn-spacing" onclick="showPage('gallery'); return false;">
                             <i class="fas fa-images"></i> View Gallery
@@ -2014,6 +2069,9 @@
                             <i class="fas fa-calendar"></i> Book a Session
                         </a>
                     </div>
+                    
+                    <!-- Slideshow Navigation Dots -->
+                    <div class="slideshow-dots" id="slideshowDots"></div>
                 </div>
             </section>
 
@@ -2570,6 +2628,184 @@
             link.addEventListener('click', closeMenu);
         });
 
+        // ===== SLIDESHOW DATA =====
+        const slideshowData = [
+            {
+                id: 1,
+                filename: "homepage-slideshow-01.jpg",
+                alt: "Professional photography studio setup at PQ Studios",
+                title: "Our Modern Studio"
+            },
+            {
+                id: 2,
+                filename: "homepage-slideshow-02.jpg",
+                alt: "Food photography session with delicious dishes",
+                title: "Food Photography Excellence"
+            },
+            {
+                id: 3,
+                filename: "homepage-slideshow-03.jpg",
+                alt: "Product photography setup with professional lighting",
+                title: "Product Photography"
+            },
+            {
+                id: 4,
+                filename: "homepage-slideshow-04.jpg",
+                alt: "Fashion photography shoot with professional models",
+                title: "Fashion & Lifestyle"
+            }
+        ];
+
+        // Initialize Slideshow
+        let currentSlide = 0;
+        let slideshowInterval;
+
+        function initSlideshow() {
+            const slideshowContainer = document.getElementById('slideshowContainer');
+            const slideshowDots = document.getElementById('slideshowDots');
+            
+            if (!slideshowContainer || !slideshowDots) return;
+            
+            // Clear any existing content
+            slideshowContainer.innerHTML = '';
+            slideshowDots.innerHTML = '';
+            
+            // Create slides
+            slideshowData.forEach((slide, index) => {
+                // Create slide element
+                const slideElement = document.createElement('div');
+                slideElement.className = `slide ${index === 0 ? 'active' : ''}`;
+                
+                // Create image element
+                const img = document.createElement('img');
+                img.src = `images/homepage/${slide.filename}`;
+                img.alt = slide.alt;
+                img.loading = "lazy";
+                
+                // Add fallback if image fails to load
+                img.onerror = function() {
+                    this.src = `https://images.unsplash.com/photo-${1554048612 + index}-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80`;
+                    this.alt = `Photography studio image ${index + 1}`;
+                };
+                
+                slideElement.appendChild(img);
+                slideElement.setAttribute('data-slide', slide.id);
+                slideElement.setAttribute('aria-label', slide.alt);
+                
+                slideshowContainer.appendChild(slideElement);
+                
+                // Create dot
+                const dot = document.createElement('button');
+                dot.className = `slideshow-dot ${index === 0 ? 'active' : ''}`;
+                dot.setAttribute('aria-label', `Go to slide ${index + 1}: ${slide.title}`);
+                dot.setAttribute('data-slide-index', index);
+                
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+                
+                slideshowDots.appendChild(dot);
+            });
+            
+            // Start automatic slideshow
+            startSlideshow();
+            
+            // Pause on hover
+            slideshowContainer.addEventListener('mouseenter', pauseSlideshow);
+            slideshowContainer.addEventListener('mouseleave', startSlideshow);
+            
+            // Touch events for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            slideshowContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                pauseSlideshow();
+            });
+            
+            slideshowContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+                startSlideshow();
+            });
+        }
+
+        function startSlideshow() {
+            if (slideshowInterval) clearInterval(slideshowInterval);
+            
+            slideshowInterval = setInterval(() => {
+                nextSlide();
+            }, 5000); // Change slide every 5 seconds
+        }
+
+        function pauseSlideshow() {
+            if (slideshowInterval) {
+                clearInterval(slideshowInterval);
+                slideshowInterval = null;
+            }
+        }
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slideshow-dot');
+            
+            if (slides.length === 0) return;
+            
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            
+            currentSlide = (currentSlide + 1) % slides.length;
+            
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function prevSlide() {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slideshow-dot');
+            
+            if (slides.length === 0) return;
+            
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function goToSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slideshow-dot');
+            
+            if (index < 0 || index >= slides.length) return;
+            
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            
+            currentSlide = index;
+            
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+            
+            // Restart slideshow after manual navigation
+            startSlideshow();
+        }
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide(); // Swipe left
+                } else {
+                    prevSlide(); // Swipe right
+                }
+            }
+        }
+
         // ===== SERVICES DATA =====
         const servicesData = [
             {
@@ -3054,31 +3290,36 @@
         // ===== CLIENTS SECTION =====
         const clientsTrack = document.getElementById('clientsTrack');
 
+        // UPDATED CLIENT LOGOS DATA - 12 LOGOS
+        const clientBrands = [
+            { name: "Client Logo 1", filename: "client-logo1.jpg", color: "#FC8019" },
+            { name: "Client Logo 2", filename: "client-logo2.jpg", color: "#000000" },
+            { name: "Client Logo 3", filename: "client-logo3.jpg", color: "#FF9900" },
+            { name: "Client Logo 4", filename: "client-logo4.jpg", color: "#E50914" },
+            { name: "Client Logo 5", filename: "client-logo5.jpg", color: "#1DB954" },
+            { name: "Client Logo 6", filename: "client-logo6.jpg", color: "#FF5A5F" },
+            { name: "Client Logo 7", filename: "client-logo7.jpg", color: "#4285F4" },
+            { name: "Client Logo 8", filename: "client-logo8.jpg", color: "#0078D4" },
+            { name: "Client Logo 9", filename: "client-logo9.jpg", color: "#3B82F6" },
+            { name: "Client Logo 10", filename: "client-logo10.jpg", color: "#10B981" },
+            { name: "Client Logo 11", filename: "client-logo11.jpg", color: "#F59E0B" },
+            { name: "Client Logo 12", filename: "client-logo12.jpg", color: "#8B5CF6" }
+        ];
+
         function loadClients() {
             if (!clientsTrack) return;
 
-            const clientBrands = [
-                { name: "Client Logo 1", number: 1, color: "#FC8019" },
-                { name: "Client Logo 2", number: 2, color: "#000000" },
-                { name: "Client Logo 3", number: 3, color: "#FF9900" },
-                { name: "Client Logo 4", number: 4, color: "#E50914" },
-                { name: "Client Logo 5", number: 5, color: "#1DB954" },
-                { name: "Client Logo 6", number: 6, color: "#FF5A5F" },
-                { name: "Client Logo 7", number: 7, color: "#4285F4" },
-                { name: "Client Logo 8", number: 8, color: "#0078D4" },
-                { name: "Client Logo 9", number: 9, color: "#3B82F6" },
-                { name: "Client Logo 10", number: 10, color: "#10B981" }
-            ];
-
             clientsTrack.innerHTML = '';
 
+            // Create 3 sets for infinite scrolling effect
             for (let set = 0; set < 3; set++) {
                 clientBrands.forEach(client => {
-                    const svgPlaceholder = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Crect width='200' height='100' fill='${client.color.replace('#', '%23')}' rx='12'/%3E%3Ctext x='100' y='55' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-size='14' font-weight='bold'%3E${encodeURIComponent(client.name)}%3C/text%3E%3Ctext x='100' y='75' text-anchor='middle' fill='rgba(255,255,255,0.8)' font-family='Arial, sans-serif' font-size='10'%3Eclient-logo${client.number}.png%3C/text%3E%3C/svg%3E`;
+                    // Create SVG placeholder with the filename
+                    const svgPlaceholder = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Crect width='200' height='100' fill='${client.color.replace('#', '%23')}' rx='12'/%3E%3Ctext x='100' y='45' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-size='16' font-weight='bold'%3E${encodeURIComponent(client.name)}%3C/text%3E%3Ctext x='100' y='70' text-anchor='middle' fill='rgba(255,255,255,0.8)' font-family='Arial, sans-serif' font-size='11'%3E${encodeURIComponent(client.filename)}%3C/text%3E%3C/svg%3E`;
                     
                     const clientItem = document.createElement('div');
                     clientItem.className = 'client-logo-item';
-                    clientItem.setAttribute('data-client', `client-${client.number}`);
+                    clientItem.setAttribute('data-client', client.filename.replace('.jpg', ''));
                     
                     clientItem.innerHTML = `
                         <img src="${svgPlaceholder}" 
@@ -3086,12 +3327,37 @@
                              class="client-logo-img"
                              loading="lazy"
                              width="200"
-                             height="100">
+                             height="100"
+                             data-src="images/clients/${client.filename}">
                     `;
                     
                     clientsTrack.appendChild(clientItem);
                 });
             }
+            
+            // Add lazy loading for client logos
+            lazyLoadClientLogos();
+        }
+
+        function lazyLoadClientLogos() {
+            const clientLogos = document.querySelectorAll('.client-logo-img[data-src]');
+            
+            const logoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const realSrc = img.getAttribute('data-src');
+                        
+                        // In a real scenario, you would load the actual image
+                        // For now, we'll just keep the placeholder
+                        // img.src = realSrc;
+                        
+                        logoObserver.unobserve(img);
+                    }
+                });
+            }, { rootMargin: '50px' });
+            
+            clientLogos.forEach(img => logoObserver.observe(img));
         }
 
         // ===== CONTACT FORM =====
@@ -3240,11 +3506,14 @@
             // Initialize page
             initPage();
             
+            // Initialize slideshow
+            initSlideshow();
+            
             // Load all content
             loadServices();
             loadGallery();
             loadFeaturedWork();
-            loadClients();
+            loadClients(); // This now loads 12 logos
             
             // Handle gallery category from URL
             const urlParams = new URLSearchParams(window.location.search);
