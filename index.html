@@ -26,10 +26,13 @@
         }
 
         :root {
+            /* BLUE COLOR THEME - Changed from red to blue */
             --primary: #1a1a2e;
             --secondary: #16213e;
-            --accent: #e94560;
-            --accent-light: #ff6b81;
+            --accent: #3a86ff; /* Changed from #e94560 (red) to blue */
+            --accent-light: #5d9cff; /* Lighter blue */
+            --accent-dark: #2a5fc1; /* Darker blue */
+            --accent-gradient: linear-gradient(135deg, #3a86ff, #4361ee);
             --light: #f8f9fa;
             --gray: #6c757d;
             --gray-light: #e9ecef;
@@ -268,14 +271,20 @@
         }
 
         .btn-primary {
-            background: var(--accent);
+            background: var(--accent-gradient);
             color: var(--white);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(58, 134, 255, 0.3);
         }
 
         .btn-primary:active {
-            background: var(--accent-light);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            background: var(--accent-dark);
+            transform: translateY(-1px);
         }
 
         .btn-outline {
@@ -284,10 +293,15 @@
             border-color: var(--accent);
         }
 
-        .btn-outline:active {
+        .btn-outline:hover {
             background: var(--accent);
             color: var(--white);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline:active {
+            background: var(--accent-dark);
+            transform: translateY(-1px);
         }
 
         .btn-block {
@@ -360,31 +374,26 @@
             position: relative;
         }
 
+        /* UPDATED LOGO SECTION - REMOVED TEXT */
         .logo {
             display: flex;
             align-items: center;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 1.35rem;
-            color: var(--primary);
             z-index: 1002;
+            gap: 10px;
         }
 
-        .logo-text {
-            font-family: 'Montserrat', sans-serif;
+        .logo-image {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+            transition: var(--transition);
         }
 
-        .logo-dot {
-            color: var(--accent);
-            margin: 0 3px;
-        }
-
-        .logo-sub {
-            color: var(--accent);
-            font-size: 0.7rem;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-            margin-left: 4px;
+        @media (max-width: 768px) {
+            .logo-image {
+                height: 40px;
+            }
         }
 
         /* Desktop Navigation */
@@ -565,7 +574,7 @@
 
         .nav-menu .nav-link:active,
         .nav-menu .nav-link.active {
-            background: rgba(233, 69, 96, 0.1);
+            background: rgba(58, 134, 255, 0.1); /* Updated to blue */
             color: var(--accent);
         }
 
@@ -890,7 +899,7 @@
         .service-icon {
             width: 70px;
             height: 70px;
-            background: var(--accent);
+            background: var(--accent-gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -921,17 +930,6 @@
             align-items: center !important;
             min-height: 56px !important;
             height: auto !important;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-light);
-            transform: translateY(-3px);
-        }
-
-        .btn-outline:hover {
-            background: var(--accent);
-            color: white;
-            transform: translateY(-3px);
         }
 
         /* ===== INSTAGRAM-STYLE GALLERY MOBILE OPTIMIZATION ===== */
@@ -968,7 +966,7 @@
                 z-index: 1000 !important;
                 background: var(--accent) !important;
                 border: none !important;
-                box-shadow: 0 4px 20px rgba(233, 69, 96, 0.3) !important;
+                box-shadow: 0 4px 20px rgba(58, 134, 255, 0.3) !important;
             }
             
             .category-selector {
@@ -1012,10 +1010,10 @@
             }
         }
 
-        /* Loading skeleton animation */
+        /* Loading skeleton animation - FIXED */
         @keyframes loading {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+            0% { background-position: -200px 0; }
+            100% { background-position: calc(200px + 100%) 0; }
         }
 
         /* ===== GALLERY PAGE ===== */
@@ -1061,7 +1059,7 @@
             justify-content: center;
             gap: 10px;
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(233, 69, 96, 0.3);
+            box-shadow: 0 6px 20px rgba(58, 134, 255, 0.3);
             transition: all 0.2s ease;
             width: calc(100% - 40px);
             max-width: 400px;
@@ -1072,7 +1070,7 @@
         }
 
         .category-toggle:active {
-            background: #d43c55;
+            background: var(--accent-dark);
             transform: scale(0.98);
         }
 
@@ -1171,7 +1169,7 @@
 
         .category-link:active,
         .category-link.active {
-            background: rgba(233, 69, 96, 0.08);
+            background: rgba(58, 134, 255, 0.08); /* Updated to blue */
             color: var(--accent);
             padding-left: 24px;
         }
@@ -1271,7 +1269,7 @@
             opacity: 1;
         }
 
-        /* Loading animation */
+        /* Fixed loading animation - NO DUPLICATE CONTENT */
         .gallery-item::before {
             content: '';
             position: absolute;
@@ -1287,6 +1285,11 @@
 
         .gallery-item img.loaded ~ .gallery-item::before {
             display: none;
+        }
+
+        .gallery-item img.loaded ~ .gallery-item::before {
+            opacity: 0;
+            animation: none;
         }
 
         /* ===== GALLERY MODAL POPUP ===== */
@@ -1508,7 +1511,7 @@
         .form-control:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.1);
+            box-shadow: 0 0 0 4px rgba(58, 134, 255, 0.1);
         }
 
         textarea.form-control {
@@ -1574,7 +1577,7 @@
             margin-top: 0.25rem;
         }
 
-        /* ===== SCROLLING CLIENTS SECTION ===== */
+        /* ===== RESTORED CLIENT LOGO SCROLLING SECTION ===== */
         .clients-section {
             padding: 3rem 0;
             background: rgba(248, 249, 250, 0.8);
@@ -1766,7 +1769,7 @@
             right: 1.5rem;
             width: 55px;
             height: 55px;
-            background: var(--accent);
+            background: var(--accent-gradient);
             color: var(--white);
             border-radius: 50%;
             display: flex;
@@ -1833,7 +1836,7 @@
 
         .price-tag {
             display: inline-block;
-            background: var(--accent);
+            background: var(--accent-gradient);
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: var(--radius-md);
@@ -1904,9 +1907,8 @@
     <header class="header">
         <div class="nav-container">
             <a href="#home" class="logo" onclick="showPage('home'); return false;">
-                <span class="logo-text">PQ</span>
-                <span class="logo-dot">•</span>
-                <span class="logo-sub">STUDIOS</span>
+                <!-- UPDATED LOGO IMAGE - NO TEXT BESIDE IT -->
+                <img src="Logo.png" alt="PQ Studios Logo" class="logo-image">
             </a>
             
             <!-- Desktop Navigation -->
@@ -1992,7 +1994,7 @@
                 </div>
             </section>
 
-            <!-- Clients Section -->
+            <!-- Clients Section - FIXED SCROLLING DESIGN -->
             <section class="clients-section">
                 <div class="container">
                     <h3 class="text-center mb-2" style="color: var(--primary);">Trusted By Leading Brands</h3>
@@ -2019,7 +2021,7 @@
             <section class="section">
                 <div class="container">
                     <div class="text-center mb-4">
-                        <img src="sai profile.jpg" 
+                        <img src="sai kumar profile pic.jpg" 
                              alt="Sai Kumar Maddina - Professional Photographer" 
                              class="profile-image"
                              loading="lazy"
@@ -2566,40 +2568,24 @@
             
             slideshowContainer.innerHTML = '';
             
-            // Preload first image
-            const firstImage = new Image();
-            firstImage.src = slideshowData[0].filename;
-            firstImage.onload = () => {
-                console.log('First slide loaded successfully');
-                createSlides();
-                startSlideshow();
-            };
-            firstImage.onerror = () => {
-                console.warn('First slide failed to load, using fallback');
-                createSlides();
-                startSlideshow();
-            };
-            
-            function createSlides() {
-                slideshowData.forEach((slide, index) => {
-                    const slideElement = document.createElement('div');
-                    slideElement.className = `slide ${index === 0 ? 'active' : ''}`;
-                    
-                    const img = document.createElement('img');
-                    img.src = slide.filename;
-                    img.alt = slide.alt;
-                    img.loading = index === 0 ? "eager" : "lazy";
-                    
-                    img.onerror = function() {
-                        console.warn('Failed to load slideshow image:', slide.filename);
-                        this.src = 'https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
-                        this.alt = 'Professional photography studio - Default image';
-                    };
-                    
-                    slideElement.appendChild(img);
-                    slideshowContainer.appendChild(slideElement);
-                });
-            }
+            slideshowData.forEach((slide, index) => {
+                const slideElement = document.createElement('div');
+                slideElement.className = `slide ${index === 0 ? 'active' : ''}`;
+                
+                const img = document.createElement('img');
+                img.src = slide.filename;
+                img.alt = slide.alt;
+                img.loading = index === 0 ? "eager" : "lazy";
+                
+                img.onerror = function() {
+                    console.warn('Failed to load slideshow image:', slide.filename);
+                    this.src = 'https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                    this.alt = 'Professional photography studio - Default image';
+                };
+                
+                slideElement.appendChild(img);
+                slideshowContainer.appendChild(slideElement);
+            });
             
             // Add touch events for mobile
             let touchStartX = 0;
@@ -2622,6 +2608,8 @@
                 }
                 startSlideshow();
             }, { passive: true });
+            
+            startSlideshow();
         }
 
         function startSlideshow() {
@@ -2857,6 +2845,7 @@
             }
         ];
 
+        // UPDATED: Correct filename patterns based on your document
         const categoryFilePatterns = {
             'food': 'food photography',
             'product': 'product photography', 
@@ -2967,6 +2956,7 @@
             });
         }
 
+        // UPDATED: Fixed gallery image loading function
         function loadGalleryImages(categoryId, count) {
             const grid = document.getElementById(`grid-${categoryId}`);
             if (!grid) return;
@@ -2977,6 +2967,7 @@
             
             for (let i = 1; i <= count; i++) {
                 const filename = `${baseName} ${i}.jpg`;
+                const imageUrl = filename; // Direct file path
                 
                 const galleryItem = document.createElement('div');
                 galleryItem.className = 'gallery-item';
@@ -2984,17 +2975,37 @@
                 galleryItem.setAttribute('tabindex', '0');
                 galleryItem.setAttribute('aria-label', `View ${filename}`);
                 
-                galleryItem.innerHTML = `
-                    <img src="${filename}" 
-                         alt="${filename}"
-                         data-filename="${filename}"
-                         loading="lazy"
-                         width="400"
-                         height="400"
-                         data-index="${i-1}"
-                         class="lazy-load"
-                         onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\"width:100%;height:100%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:12px;padding:10px;text-align:center;\">Image ${i}<br>${baseName}</div>'">
-                `;
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = `${baseName} image ${i}`;
+                img.loading = "lazy";
+                img.width = 400;
+                img.height = 400;
+                img.setAttribute('data-index', i-1);
+                img.setAttribute('data-filename', filename);
+                img.classList.add('lazy-load');
+                
+                // Add error handling
+                img.onerror = function() {
+                    console.warn('Failed to load image:', imageUrl);
+                    this.style.display = 'none';
+                    this.parentElement.innerHTML = `
+                        <div style="width:100%;height:100%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:12px;padding:10px;text-align:center;">
+                            ${categoryId}<br>Image ${i}
+                        </div>
+                    `;
+                };
+                
+                img.onload = function() {
+                    this.classList.add('loaded');
+                    // Hide the loading skeleton
+                    const skeleton = this.parentElement.querySelector('.gallery-item::before');
+                    if (skeleton) {
+                        skeleton.style.opacity = '0';
+                    }
+                };
+                
+                galleryItem.appendChild(img);
                 
                 galleryItem.addEventListener('click', () => {
                     openGalleryPopup(categoryId, i-1);
@@ -3020,7 +3031,10 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const img = entry.target;
-                        img.classList.add('loaded');
+                        // Don't add loaded class if already loaded
+                        if (!img.classList.contains('loaded')) {
+                            img.classList.add('loaded');
+                        }
                         observer.unobserve(img);
                     }
                 });
@@ -3030,7 +3044,11 @@
             });
             
             galleryItems.forEach(img => {
-                if (img.getBoundingClientRect().top < window.innerHeight + 200) {
+                // Check if image is already loaded (from cache)
+                if (img.complete) {
+                    img.classList.add('loaded');
+                } else if (img.getBoundingClientRect().top < window.innerHeight + 200) {
+                    // If image is in viewport or near it
                     img.classList.add('loaded');
                 } else {
                     imageObserver.observe(img);
@@ -3156,7 +3174,7 @@
                 modalImage.alt = imageData.alt;
                 
                 const categoryName = galleryCategories.find(cat => cat.id === currentCategoryId)?.name || 'Gallery';
-                modalTitle.textContent = `${categoryName} - ${imageData.filename}`;
+                modalTitle.textContent = `${categoryName} - Image ${currentImageIndex + 1}`;
                 modalCounter.textContent = `${currentImageIndex + 1} / ${currentGalleryImages.length}`;
             };
             
@@ -3210,19 +3228,24 @@
                     }, 100);
                 });
                 
-                featuredItem.innerHTML = `
-                    <img src="${item.image}" 
-                         alt="${item.title}" 
-                         loading="lazy"
-                         width="400"
-                         height="400"
-                         onerror="this.src='https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=400&q=80'; this.alt='Fallback image'">
-                `;
+                const img = document.createElement('img');
+                img.src = item.image;
+                img.alt = item.title;
+                img.loading = "lazy";
+                img.width = 400;
+                img.height = 400;
+                
+                img.onerror = function() {
+                    this.src = 'https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=400&q=80';
+                    this.alt = 'Fallback image';
+                };
+                
+                featuredItem.appendChild(img);
                 featuredGrid.appendChild(featuredItem);
             });
         }
 
-        // ===== CLIENTS SECTION =====
+        // ===== RESTORED CLIENT LOGO SCROLLING =====
         const clientsTrack = document.getElementById('clientsTrack');
 
         function loadClients() {
@@ -3245,21 +3268,26 @@
                 "client logos 12.jpg"
             ];
 
-            for (let set = 0; set < 3; set++) {
+            // Create two sets for seamless looping
+            for (let set = 0; set < 2; set++) {
                 clientFiles.forEach(filename => {
                     const clientItem = document.createElement('div');
                     clientItem.className = 'client-logo-item';
                     
-                    clientItem.innerHTML = `
-                        <img src="${filename}" 
-                             alt="Client Logo" 
-                             class="client-logo-img"
-                             loading="lazy"
-                             width="160"
-                             height="90"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\"width:160px;height:90px;background:#f0f0f0;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#666;font-weight:bold;\">${filename.replace('.jpg', '')}</div>'">
-                    `;
+                    const img = document.createElement('img');
+                    img.src = filename;
+                    img.alt = "Client Logo";
+                    img.className = "client-logo-img";
+                    img.loading = "lazy";
+                    img.width = 160;
+                    img.height = 90;
                     
+                    img.onerror = function() {
+                        this.style.display = 'none';
+                        this.parentElement.innerHTML = `<div style="width:160px;height:90px;background:#f0f0f0;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#666;font-weight:bold;">${filename.replace('.jpg', '')}</div>`;
+                    };
+                    
+                    clientItem.appendChild(img);
                     clientsTrack.appendChild(clientItem);
                 });
             }
@@ -3363,7 +3391,7 @@
         function highlightFieldError(field) {
             if (field) {
                 field.style.borderColor = 'var(--accent)';
-                field.style.boxShadow = '0 0 0 3px rgba(233, 69, 96, 0.1)';
+                field.style.boxShadow = '0 0 0 3px rgba(58, 134, 255, 0.1)';
                 field.focus();
             }
         }
