@@ -609,17 +609,23 @@
             }
         }
 
-        /* ===== HOME PAGE Featured Work - UPDATED with 6 items ===== */
+        /* ===== HOME PAGE Featured Work - FIXED SPACING ===== */
         .featured-work {
             position: relative;
-            padding-top: 2rem;
+            padding-top: 0 !important; /* REMOVED: No top padding */
+            padding-bottom: 1rem !important; /* REDUCED: Minimal bottom padding */
+        }
+
+        .featured-work .container {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
         }
         
         .featured-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 4px;
-            margin-top: 2rem;
+            margin-top: 0.5rem !important; /* REDUCED: Minimal top margin */
             position: relative;
             z-index: 2;
         }
@@ -628,6 +634,7 @@
             .featured-grid {
                 grid-template-columns: repeat(3, 1fr); /* Changed to 3 columns for 6 items */
                 gap: 1rem;
+                margin-top: 0.75rem !important; /* Slightly more on desktop */
             }
         }
 
@@ -2026,17 +2033,17 @@
                 </div>
             </section>
 
-            <!-- Featured Work Section - UPDATED with 6 items -->
+            <!-- Featured Work Section - SPACING FIXED -->
             <section class="section featured-work">
                 <div class="container">
-                    <h2 class="text-center mb-4">Featured Work</h2>
-                    <p class="text-center mb-4">A glimpse of our recent photography projects</p>
+                    <h2 class="text-center" style="margin-bottom: 0.25rem;">Featured Work</h2>
+                    <p class="text-center" style="margin-bottom: 0.5rem;">A glimpse of our recent photography projects</p>
                     
                     <div class="featured-grid" id="featuredGrid">
                         <!-- Featured items loaded by JavaScript -->
                     </div>
                     
-                    <div class="text-center mt-4">
+                    <div class="text-center" style="margin-top: 1rem;">
                         <a href="#gallery" class="btn btn-primary btn-spacing" onclick="event.preventDefault(); showPage('gallery');">
                             <i class="fas fa-images"></i> View Full Gallery
                         </a>
