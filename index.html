@@ -55,7 +55,7 @@
             -webkit-text-size-adjust: 100%;
         }
 
-        /* ===== ENHANCED PHOTOGRAPHY ICONS BACKGROUND ===== */
+        /* ===== ENHANCED PHOTOGRAPHY ICONS BACKGROUND - FIXED FOR MOBILE ===== */
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--black);
@@ -93,6 +93,9 @@
             animation: float 20s infinite ease-in-out;
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
             text-shadow: 0 0 1px rgba(0,0,0,0.1);
+            /* Prevent overlap on mobile */
+            min-width: 24px;
+            min-height: 24px;
         }
 
         .icon.dark {
@@ -543,10 +546,10 @@
             display: block;
         }
 
-        /* ===== HOME PAGE - UPDATED SLIDESHOW ===== */
+        /* ===== HOME PAGE - FIXED MOBILE SLIDESHOW ===== */
         .slideshow-hero {
             position: relative;
-            min-height: 85vh; /* Desktop: Not full screen */
+            min-height: 75vh; /* Reduced from 85vh for better mobile proportion */
             display: flex;
             align-items: center;
             overflow: hidden;
@@ -554,17 +557,18 @@
 
         @media (max-width: 768px) {
             .slideshow-hero {
-                min-height: 60vh; /* Mobile: Square shape */
-                height: 60vh;
-                max-height: 60vh;
+                min-height: 50vh; /* Fixed: Reduced from 60vh to 50vh for rectangle shape */
+                height: 50vh;
+                max-height: 50vh;
+                margin-top: 0;
             }
         }
 
         @media (max-width: 480px) {
             .slideshow-hero {
-                min-height: 55vh; /* Smaller mobile */
-                height: 55vh;
-                max-height: 55vh;
+                min-height: 45vh; /* Slightly smaller for very small screens */
+                height: 45vh;
+                max-height: 45vh;
             }
         }
 
@@ -594,8 +598,15 @@
         .slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Changed from cover to contain for better mobile view */
             object-position: center;
+        }
+
+        @media (max-width: 768px) {
+            .slide img {
+                object-fit: contain; /* Show full image on mobile without cropping */
+                background-color: #f8f9fa; /* Add background color for letterboxing */
+            }
         }
 
         /* ===== HOME PAGE Featured Work - UPDATED with 6 items ===== */
@@ -640,7 +651,7 @@
             transform: scale(1.05);
         }
 
-        /* ===== FIXED CLIENT LOGO SCROLLING - UPDATED for mobile ===== */
+        /* ===== FIXED CLIENT LOGO SCROLLING - COMPLETELY FIXED ===== */
         .clients-section {
             padding: 3rem 0;
             background: rgba(248, 249, 250, 0.8);
@@ -659,10 +670,9 @@
         .clients-track {
             display: flex;
             align-items: center;
-            gap: 1.5rem; /* Reduced gap for mobile */
-            padding: 1.5rem 0;
-            animation: scrollClients 30s linear infinite;
+            animation: scrollClients 25s linear infinite; /* Increased speed from 30s to 25s */
             will-change: transform;
+            width: max-content;
         }
         
         .clients-track:hover {
@@ -691,6 +701,30 @@
             border: 1px solid var(--gray-light);
             transition: all 0.3s ease;
             box-shadow: var(--shadow-sm);
+            margin-right: 2rem; /* Added spacing between logos */
+        }
+
+        /* Show 4-5 logos at a time on mobile */
+        @media (max-width: 767px) {
+            .client-logo-item {
+                width: 110px;
+                height: 65px;
+                padding: 12px !important;
+                margin-right: 1.5rem;
+            }
+            
+            @keyframes scrollClients {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(-50%);
+                }
+            }
+            
+            .clients-track {
+                animation-duration: 20s; /* Faster on mobile */
+            }
         }
 
         @media (min-width: 768px) {
@@ -699,10 +733,7 @@
                 height: 90px;
                 padding: 25px !important;
                 box-shadow: var(--shadow-lg);
-            }
-            
-            .clients-track {
-                gap: 2.5rem;
+                margin-right: 2.5rem;
             }
         }
         
@@ -2013,7 +2044,7 @@
                 </div>
             </section>
 
-            <!-- Clients Section - UPDATED for mobile -->
+            <!-- Clients Section - FIXED SCROLLING -->
             <section class="clients-section">
                 <div class="container">
                     <h3 class="text-center mb-2" style="color: var(--primary);">Trusted By Leading Brands</h3>
@@ -2476,7 +2507,7 @@
             showPage(pageId);
         }
 
-        // ===== BACKGROUND GENERATOR =====
+        // ===== BACKGROUND GENERATOR - FIXED FOR MOBILE =====
         function initBackground() {
             const container = document.getElementById('photography-icons');
             if (!container) return;
@@ -2488,10 +2519,47 @@
                 'adjust', 'filter', 'crop', 'magic', 'paint-brush'
             ];
             
-            const totalIcons = 45;
+            // Reduce number of icons on mobile to prevent overlap
+            const isMobile = window.innerWidth <= 768;
+            const totalIcons = isMobile ? 25 : 45;
+            
             container.innerHTML = '';
             
+            // Store icon positions to prevent overlap
+            const usedPositions = [];
+            const minDistance = isMobile ? 15 : 10; // Minimum distance between icons (in %)
+            
             for (let i = 0; i < totalIcons; i++) {
+                let posX, posY;
+                let attempts = 0;
+                let positionValid = false;
+                
+                // Try to find a non-overlapping position
+                do {
+                    posX = Math.random() * 95;
+                    posY = Math.random() * 95;
+                    attempts++;
+                    
+                    // Check if this position is too close to any existing icon
+                    positionValid = true;
+                    for (const pos of usedPositions) {
+                        const distance = Math.sqrt(Math.pow(pos.x - posX, 2) + Math.pow(pos.y - posY, 2));
+                        if (distance < minDistance) {
+                            positionValid = false;
+                            break;
+                        }
+                    }
+                    
+                } while (!positionValid && attempts < 50);
+                
+                // If we couldn't find a good position, use this one anyway
+                if (!positionValid) {
+                    posX = Math.random() * 95;
+                    posY = Math.random() * 95;
+                }
+                
+                usedPositions.push({ x: posX, y: posY });
+                
                 const icon = document.createElement('div');
                 icon.className = 'icon';
                 
@@ -2503,11 +2571,10 @@
                     icon.innerHTML = `<i class="fas fa-${icons[Math.floor(Math.random() * icons.length)]}"></i>`;
                 }
                 
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                const size = 1.2 + Math.random() * 1.5;
+                // Smaller icons on mobile
+                const size = isMobile ? (0.8 + Math.random() * 0.8) : (1.2 + Math.random() * 1.5);
                 const rotation = Math.random() * 360;
-                const opacity = 0.3 + Math.random() * 0.4;
+                const opacity = isMobile ? (0.2 + Math.random() * 0.3) : (0.3 + Math.random() * 0.4);
                 const delay = Math.random() * 20;
                 
                 icon.style.left = `${posX}%`;
@@ -2570,7 +2637,7 @@
             document.body.style.overflow = '';
         }
 
-        // ===== SLIDESHOW =====
+        // ===== SLIDESHOW - FIXED FOR MOBILE =====
         function initSlideshow() {
             const slideshowContainer = document.getElementById('slideshowContainer');
             if (!slideshowContainer) return;
@@ -2594,10 +2661,15 @@
                 img.loading = index === 0 ? "eager" : "lazy";
                 
                 img.onerror = function() {
+                    // Create a placeholder with the right aspect ratio for mobile
+                    const isMobile = window.innerWidth <= 768;
+                    const placeholderHeight = isMobile ? '50vh' : '75vh';
+                    
                     this.style.backgroundColor = '#f0f0f0';
                     this.style.display = 'flex';
                     this.style.alignItems = 'center';
                     this.style.justifyContent = 'center';
+                    this.style.minHeight = placeholderHeight;
                     this.innerHTML = `<div style="color: var(--accent); font-weight: bold; text-align: center; padding: 20px;">Slide ${index + 1}<br><small>Professional Photography</small></div>`;
                 };
                 
@@ -2664,7 +2736,7 @@
             });
         }
 
-        // ===== CLIENT LOGOS =====
+        // ===== CLIENT LOGOS - COMPLETELY FIXED SCROLLING =====
         function loadClients() {
             const clientsTrack = document.getElementById('clientsTrack');
             if (!clientsTrack) return;
@@ -2686,7 +2758,9 @@
 
             clientsTrack.innerHTML = '';
             
-            for (let set = 0; set < 2; set++) {
+            // Duplicate the logos for seamless infinite scrolling
+            // Use 3 sets instead of 2 for smoother loop
+            for (let set = 0; set < 3; set++) {
                 clientLogos.forEach(filename => {
                     const logoItem = document.createElement('div');
                     logoItem.className = 'client-logo-item';
@@ -2708,6 +2782,16 @@
                     clientsTrack.appendChild(logoItem);
                 });
             }
+            
+            // Ensure animation runs
+            setTimeout(() => {
+                const track = document.querySelector('.clients-track');
+                if (track) {
+                    track.style.animation = 'none';
+                    void track.offsetWidth; // Trigger reflow
+                    track.style.animation = 'scrollClients 25s linear infinite';
+                }
+            }, 100);
         }
 
         // ===== SERVICES =====
