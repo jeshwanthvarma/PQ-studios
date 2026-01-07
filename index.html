@@ -609,23 +609,24 @@
             }
         }
 
-        /* ===== HOME PAGE Featured Work - FIXED SPACING ===== */
+        /* ===== HOME PAGE Featured Work - NO SPACE ABOVE ===== */
         .featured-work {
             position: relative;
-            padding-top: 0 !important; /* REMOVED: No top padding */
-            padding-bottom: 1rem !important; /* REDUCED: Minimal bottom padding */
+            padding-top: 0 !important; /* REMOVED COMPLETELY */
+            padding-bottom: 0.5rem !important; /* MINIMAL BOTTOM */
+            margin-top: -10px !important; /* PULL UP TO REMOVE GAP */
         }
 
         .featured-work .container {
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
+            padding-top: 5px !important; /* ALMOST NONE */
+            padding-bottom: 5px !important;
         }
         
         .featured-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 4px;
-            margin-top: 0.5rem !important; /* REDUCED: Minimal top margin */
+            margin-top: 0.25rem !important; /* TINY GAP */
             position: relative;
             z-index: 2;
         }
@@ -634,7 +635,7 @@
             .featured-grid {
                 grid-template-columns: repeat(3, 1fr); /* Changed to 3 columns for 6 items */
                 gap: 1rem;
-                margin-top: 0.75rem !important; /* Slightly more on desktop */
+                margin-top: 0.5rem !important; /* Slightly more on desktop */
             }
         }
 
@@ -2014,12 +2015,12 @@
             <button class="modal-nav-btn modal-prev" id="modalPrev" aria-label="Previous image">
                 <i class="fas fa-chevron-left"></i>
             </button>
-            <div class="modal-image-container">
-                <img id="modalImage" class="modal-image" src="" alt="">
-            </div>
             <button class="modal-nav-btn modal-next" id="modalNext" aria-label="Next image">
                 <i class="fas fa-chevron-right"></i>
             </button>
+            <div class="modal-image-container">
+                <img id="modalImage" class="modal-image" src="" alt="">
+            </div>
         </div>
     </div>
 
@@ -2033,17 +2034,17 @@
                 </div>
             </section>
 
-            <!-- Featured Work Section - SPACING FIXED -->
+            <!-- Featured Work Section - NO SPACE ABOVE -->
             <section class="section featured-work">
                 <div class="container">
-                    <h2 class="text-center" style="margin-bottom: 0.25rem;">Featured Work</h2>
-                    <p class="text-center" style="margin-bottom: 0.5rem;">A glimpse of our recent photography projects</p>
+                    <h2 class="text-center" style="margin-bottom: 0.1rem;">Featured Work</h2>
+                    <p class="text-center" style="margin-bottom: 0.25rem;">A glimpse of our recent photography projects</p>
                     
                     <div class="featured-grid" id="featuredGrid">
                         <!-- Featured items loaded by JavaScript -->
                     </div>
                     
-                    <div class="text-center" style="margin-top: 1rem;">
+                    <div class="text-center" style="margin-top: 0.5rem;">
                         <a href="#gallery" class="btn btn-primary btn-spacing" onclick="event.preventDefault(); showPage('gallery');">
                             <i class="fas fa-images"></i> View Full Gallery
                         </a>
