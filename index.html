@@ -32,10 +32,10 @@
             /* UPDATED BLUE COLOR THEME - #4682b4 */
             --primary: #1a1a2e;
             --secondary: #16213e;
-            --accent: #4682b4; /* CHANGED from #3a86ff to #4682b4 */
+            --accent: #4682b4;
             --accent-light: #5d9cff;
             --accent-dark: #2a5fc1;
-            --accent-gradient: linear-gradient(135deg, #4682b4, #4361ee); /* UPDATED */
+            --accent-gradient: linear-gradient(135deg, #4682b4, #4361ee);
             --light: #f8f9fa;
             --gray: #6c757d;
             --gray-light: #e9ecef;
@@ -48,7 +48,6 @@
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
             --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
             --shadow-lg: 0 8px 24px rgba(0,0,0,0.16);
-            --overlay: rgba(0,0,0,0.9);
         }
 
         html {
@@ -57,7 +56,6 @@
             -webkit-text-size-adjust: 100%;
         }
 
-        /* ===== FIXED: IMPROVED BACKGROUND VISIBILITY - NO OVERLAPPING ===== */
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--black);
@@ -66,7 +64,6 @@
             position: relative;
             overflow-x: hidden;
             min-height: 100vh;
-            /* Lighter background for better visibility */
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(70, 130, 180, 0.02) 0%, transparent 25%),
                 radial-gradient(circle at 90% 80%, rgba(70, 130, 180, 0.02) 0%, transparent 25%);
@@ -80,27 +77,26 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
-            background-color: rgba(255, 255, 255, 0.95); /* Lighter background */
+            background-color: rgba(255, 255, 255, 0.95);
             pointer-events: none;
-            opacity: 0.3; /* Reduced opacity for better visibility */
+            opacity: 0.3;
         }
         
         .icon {
             position: absolute;
-            color: rgba(70, 130, 180, 0.12); /* Lighter color for better visibility */
+            color: rgba(70, 130, 180, 0.12);
             font-size: 1.2rem;
             opacity: 0.6;
             z-index: -1;
             pointer-events: none;
             animation: float 25s infinite ease-in-out;
             filter: drop-shadow(0 1px 1px rgba(0,0,0,0.05));
-            /* Prevent overlap with better spacing */
             min-width: 28px;
             min-height: 28px;
         }
 
         .icon.dark {
-            color: rgba(0, 0, 0, 0.08); /* Lighter faded black icons */
+            color: rgba(0, 0, 0, 0.08);
         }
 
         @keyframes float {
@@ -131,7 +127,7 @@
         /* ===== FIXED: DESKTOP FULL WIDTH CONTAINER ===== */
         .container {
             width: 100%;
-            max-width: 1400px; /* Increased for wider desktop view */
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 15px;
             position: relative;
@@ -140,7 +136,7 @@
         @media (min-width: 768px) {
             .container {
                 padding: 0 30px;
-                max-width: 100%; /* Full width on desktop */
+                max-width: 100%;
             }
         }
 
@@ -207,13 +203,10 @@
             min-width: 56px;
             gap: 0.75rem;
             touch-action: manipulation;
-            -webkit-user-select: none;
-            user-select: none;
             position: relative;
             z-index: 2;
         }
 
-        /* Fix for desktop button alignment */
         @media (min-width: 768px) {
             .btn-group {
                 justify-content: center;
@@ -239,7 +232,7 @@
         .btn-primary:hover {
             background: var(--accent-light);
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(70, 130, 180, 0.3); /* Updated */
+            box-shadow: 0 10px 25px rgba(70, 130, 180, 0.3);
         }
 
         .btn-primary:active {
@@ -405,7 +398,7 @@
             }
         }
 
-        /* Mobile Menu - FIXED: Menu starts below logo */
+        /* Mobile Menu */
         .menu-toggle {
             width: 48px;
             height: 48px;
@@ -566,38 +559,35 @@
             display: block;
         }
 
-        /* ===== FIXED: MOBILE HERO SLIDESHOW - NO BLANK SPACE ===== */
-        /* ===== FIXED: MOBILE HERO SLIDESHOW WITH PROPER SPACING ===== */
-.slideshow-hero {
-    position: relative;
-    min-height: 75vh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
+        /* ===== FIXED: MOBILE-OPTIMIZED HERO SLIDESHOW ===== */
+        .slideshow-hero {
+            position: relative;
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
 
-@media (max-width: 768px) {
-    .slideshow-hero {
-        min-height: 55vh;
-        height: 55vh;
-        max-height: 55vh;
-        margin-top: 0;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        /* REMOVED negative margin */
-    }
-}
+        @media (max-width: 768px) {
+            .slideshow-hero {
+                min-height: 55vh;
+                height: 55vh;
+                max-height: 55vh;
+                margin-top: 0;
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+        }
 
-@media (max-width: 480px) {
-    .slideshow-hero {
-        min-height: 50vh;
-        height: 50vh;
-        max-height: 50vh;
-        padding-top: 3px;
-        padding-bottom: 3px;
-        /* REMOVED negative margin */
-    }
-}
+        @media (max-width: 480px) {
+            .slideshow-hero {
+                min-height: 50vh;
+                height: 50vh;
+                max-height: 50vh;
+                padding-top: 3px;
+                padding-bottom: 3px;
+            }
+        }
 
         .slideshow-container {
             position: absolute;
@@ -622,63 +612,62 @@
             opacity: 1;
         }
 
+        .slide picture {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
         .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
 
-@media (max-width: 768px) {
-    .slide img {
-        object-fit: contain; /* Shows full image without cropping */
-    }
-}
+        @media (max-width: 768px) {
+            .slide img {
+                object-fit: contain;
+                background-color: #f8f9fa;
+            }
+        }
 
-        /* ===== HOME PAGE Featured Work - SEAMLESS CONNECTION ===== */
         /* ===== FIXED: FEATURED WORK WITH PROPER SPACING ===== */
-.featured-work {
-    position: relative;
-    padding-top: 2rem !important; /* ADDED padding top */
-    padding-bottom: 1.5rem !important;
-    margin-top: 0 !important; /* REMOVED negative margin */
-}
+        .featured-work {
+            position: relative;
+            padding-top: 2rem !important;
+            padding-bottom: 1.5rem !important;
+            margin-top: 0 !important;
+        }
 
-@media (max-width: 768px) {
-    .featured-work {
-        padding-top: 1.5rem !important; /* Slightly less on mobile */
-        padding-bottom: 1rem !important;
-        margin-top: 0 !important;
-    }
-}
+        @media (max-width: 768px) {
+            .featured-work {
+                padding-top: 1.5rem !important;
+                padding-bottom: 1rem !important;
+                margin-top: 0 !important;
+            }
+        }
 
-.featured-work .container {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
+        .featured-work .container {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
         
-       .featured-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
-    margin-top: 1rem !important;
-    position: relative;
-    z-index: 2;
-}
-
-@media (min-width: 768px) {
-    .featured-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-        margin-top: 1.5rem !important;
-    }
-}
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4px;
+            margin-top: 1rem !important;
+            position: relative;
+            z-index: 2;
+        }
 
         @media (min-width: 768px) {
             .featured-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 1rem;
-                margin-top: 0.5rem !important;
+                margin-top: 1.5rem !important;
             }
         }
 
@@ -797,7 +786,7 @@
             transform: scale(1.1);
         }
 
-        /* ===== ABOUT PAGE - FIXED MOBILE LAYOUT ===== */
+        /* ===== ABOUT PAGE ===== */
         .about-hero {
             position: relative;
             min-height: 20vh;
@@ -834,7 +823,6 @@
             transform: scale(1.05);
         }
 
-        /* Brand Story Section - Fixed spacing */
         .brand-story {
             background: rgba(255, 255, 255, 0.95);
             border-radius: var(--radius-lg);
@@ -896,7 +884,7 @@
             min-width: 30px;
         }
 
-        /* Stats Grid - UPDATED: Removed Sessions and Awards */
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -954,7 +942,7 @@
             color: var(--gray);
         }
 
-        /* ===== SERVICES PAGE - UPDATED ORDER ===== */
+        /* ===== SERVICES PAGE ===== */
         .services-hero {
             position: relative;
             min-height: 20vh;
@@ -989,7 +977,7 @@
 
         @media (min-width: 1400px) {
             .service-cards {
-                grid-template-columns: repeat(4, 1fr); /* 4 columns on very wide screens */
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
@@ -1367,7 +1355,7 @@
             object-fit: contain;
         }
 
-        /* ===== FIXED: CONTACT PAGE - PROFESSIONAL THEME ===== */
+        /* ===== CONTACT PAGE ===== */
         .contact-hero {
             position: relative;
             min-height: 20vh;
@@ -1396,7 +1384,7 @@
             }
         }
 
-        /* Contact info cards - Clean professional design */
+        /* Contact info cards */
         .contact-info-cards {
             display: grid;
             grid-template-columns: 1fr;
@@ -1546,7 +1534,7 @@
             padding-right: 2.5rem;
         }
 
-        /* WhatsApp CTA Section - Professional design */
+        /* WhatsApp CTA Section */
         .whatsapp-cta {
             background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
@@ -1744,11 +1732,7 @@
             margin-top: 4px;
         }
 
-        /* Footer contact info - OPTIMIZED FOR MOBILE */
-        .footer-contact {
-            margin-top: 1.5rem;
-        }
-
+        /* Footer contact info */
         .contact-info {
             display: flex;
             flex-direction: column;
@@ -1788,7 +1772,7 @@
             line-height: 1.4;
         }
 
-        /* Enhanced Social Links for Mobile */
+        /* Social Links */
         .social-links {
             display: flex;
             gap: 10px;
@@ -1830,84 +1814,6 @@
 
         .social-link.phone {
             background: #34B7F1;
-        }
-
-        /* Mobile-specific optimizations */
-        @media (max-width: 767px) {
-            .footer {
-                padding: 2rem 0 1rem;
-            }
-            
-            .footer-grid {
-                gap: 1.5rem;
-            }
-            
-            .footer h3 {
-                font-size: 1.1rem;
-                margin-bottom: 1rem;
-            }
-            
-            .footer ul li,
-            .footer ul li a {
-                font-size: 0.8rem;
-                line-height: 1.4;
-                margin-bottom: 0.4rem;
-            }
-            
-            .contact-item {
-                font-size: 0.85rem;
-                gap: 0.5rem;
-            }
-            
-            .social-link {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-            
-            /* Ensure tap targets are large enough on mobile */
-            .footer ul li a {
-                min-height: 28px;
-                padding: 6px 0;
-            }
-            
-            .all-features-list li {
-                min-height: 28px;
-                padding: 6px 0;
-            }
-        }
-
-        /* Tablet optimizations */
-        @media (min-width: 768px) and (max-width: 1023px) {
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            /* Reorder columns for better flow on tablet */
-            .footer-grid > div:nth-child(1) { order: 1; }
-            .footer-grid > div:nth-child(2) { order: 2; }
-            .footer-grid > div:nth-child(3) { order: 3; }
-            .footer-grid > div:nth-child(4) { order: 4; }
-        }
-
-        /* Touch optimizations for mobile */
-        @media (hover: none) and (pointer: coarse) {
-            .footer ul li a:hover {
-                transform: none;
-            }
-            
-            .footer ul li a:active {
-                color: var(--accent-light);
-                transform: scale(0.98);
-            }
-            
-            .social-link:hover {
-                transform: none;
-            }
-            
-            .social-link:active {
-                transform: scale(0.95);
-            }
         }
 
         /* ===== BACK TO TOP ===== */
@@ -1966,27 +1872,6 @@
             }
         }
 
-        /* ===== ALIGNMENT FIXES ===== */
-        .text-left { text-align: left; }
-        .text-right { text-align: right; }
-        
-        /* Improved alignment for desktop */
-        @media (min-width: 768px) {
-            .desktop-align-center {
-                text-align: center !important;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .desktop-full-width {
-                width: 100% !important;
-                max-width: 100% !important;
-                padding-left: 0 !important;
-                padding-right: 0 !important;
-            }
-        }
-
         /* ===== MOBILE OPTIMIZATIONS ===== */
         @media (max-width: 767px) {
             .container {
@@ -2038,12 +1923,20 @@
                 gap: 2rem;
             }
             
-            /* Fix text spacing on mobile */
-            .brand-story p,
-            .about-hero p,
-            .services-hero p {
-                line-height: 1.6;
-                margin-bottom: 1rem;
+            /* Mobile-specific touch improvements */
+            .btn, .nav-link, .social-link, .client-logo-item,
+            .featured-item, .service-card, .info-card {
+                -webkit-tap-highlight-color: rgba(70, 130, 180, 0.2);
+            }
+            
+            /* Larger tap targets for mobile */
+            .btn {
+                min-height: 48px;
+                min-width: 48px;
+            }
+            
+            .nav-menu .nav-link {
+                min-height: 54px;
             }
         }
 
@@ -2054,7 +1947,8 @@
             .social-link:hover,
             .client-logo-item:hover,
             .featured-item:hover img,
-            .service-card:hover {
+            .service-card:hover,
+            .info-card:hover {
                 transform: none;
             }
             
@@ -2063,12 +1957,23 @@
             .social-link:active,
             .client-logo-item:active,
             .featured-item:active img,
-            .service-card:active {
+            .service-card:active,
+            .info-card:active {
                 transform: scale(0.95);
             }
             
             .back-to-top:active {
                 transform: scale(0.95);
+            }
+            
+            /* Remove hover effects on touch devices */
+            .desktop-nav .nav-link:hover::after {
+                width: 0;
+            }
+            
+            .client-logo-item:hover .client-logo-img {
+                opacity: 1;
+                transform: none;
             }
         }
 
@@ -2096,6 +2001,18 @@
             background: rgba(220, 53, 69, 0.1);
             color: #dc3545;
             border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+
+        /* ===== PERFORMANCE OPTIMIZATIONS ===== */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
         }
     </style>
 </head>
@@ -2162,11 +2079,45 @@
 
     <!-- Page Content -->
     <div class="page-content">
-        <!-- HOME PAGE -->
+        <!-- HOME PAGE - MOBILE OPTIMIZED -->
         <div id="home-page" class="page active">
             <section class="slideshow-hero">
                 <div class="slideshow-container" id="slideshowContainer">
-                    <!-- Slides loaded by JavaScript -->
+                    <!-- Slide 1 - Mobile Optimized -->
+                    <div class="slide active">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="homepageslideshow_mobile_01.jpg">
+                            <source media="(min-width: 769px)" srcset="homepageslideshow01.jpg">
+                            <img src="homepageslideshow01.jpg" alt="Professional Photography Studio" loading="eager">
+                        </picture>
+                    </div>
+                    
+                    <!-- Slide 2 - Mobile Optimized -->
+                    <div class="slide">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="homepageslideshow_mobile_02.jpg">
+                            <source media="(min-width: 769px)" srcset="homepageslideshow02.jpg">
+                            <img src="homepageslideshow02.jpg" alt="Food Photography" loading="lazy">
+                        </picture>
+                    </div>
+                    
+                    <!-- Slide 3 - Mobile Optimized -->
+                    <div class="slide">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="homepageslideshow_mobile_03.jpg">
+                            <source media="(min-width: 769px)" srcset="homepageslideshow03.jpg">
+                            <img src="homepageslideshow03.jpg" alt="Product Photography" loading="lazy">
+                        </picture>
+                    </div>
+                    
+                    <!-- Slide 4 - Mobile Optimized -->
+                    <div class="slide">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="homepageslideshow_mobile_04.jpg">
+                            <source media="(min-width: 769px)" srcset="homepageslideshow04.jpg">
+                            <img src="homepageslideshow04.jpg" alt="Fashion Photography" loading="lazy">
+                        </picture>
+                    </div>
                 </div>
             </section>
 
@@ -2574,9 +2525,9 @@
             initSlideshow();
             loadFeaturedWork();
             loadClients();
-            loadServices(); // Loads in new order
-            loadGallerySections(); // Loads in new order
-            initSimpleDropdown(); // Updated with new order
+            loadServices();
+            loadGallerySections();
+            initSimpleDropdown();
             initGalleryModal();
             initContactForm();
             initBackToTop();
@@ -2646,7 +2597,7 @@
             showPage(pageId);
         }
 
-        // ===== BACKGROUND GENERATOR - FIXED: NO OVERLAPPING =====
+        // ===== BACKGROUND GENERATOR =====
         function initBackground() {
             const container = document.getElementById('photography-icons');
             if (!container) return;
@@ -2658,28 +2609,24 @@
                 'adjust', 'filter', 'crop', 'magic', 'paint-brush'
             ];
             
-            // Reduce number of icons on mobile to prevent overlap
             const isMobile = window.innerWidth <= 768;
-            const totalIcons = isMobile ? 20 : 35; // Reduced further to prevent overlap
+            const totalIcons = isMobile ? 20 : 35;
             
             container.innerHTML = '';
             
-            // Store icon positions to prevent overlap
             const usedPositions = [];
-            const minDistance = isMobile ? 18 : 12; // Increased minimum distance
+            const minDistance = isMobile ? 18 : 12;
             
             for (let i = 0; i < totalIcons; i++) {
                 let posX, posY;
                 let attempts = 0;
                 let positionValid = false;
                 
-                // Try to find a non-overlapping position
                 do {
-                    posX = Math.random() * 90 + 5; // Keep away from edges
+                    posX = Math.random() * 90 + 5;
                     posY = Math.random() * 90 + 5;
                     attempts++;
                     
-                    // Check if this position is too close to any existing icon
                     positionValid = true;
                     for (const pos of usedPositions) {
                         const distance = Math.sqrt(Math.pow(pos.x - posX, 2) + Math.pow(pos.y - posY, 2));
@@ -2689,12 +2636,9 @@
                         }
                     }
                     
-                } while (!positionValid && attempts < 100); // More attempts
+                } while (!positionValid && attempts < 100);
                 
-                // If we couldn't find a good position, skip this icon
-                if (!positionValid) {
-                    continue;
-                }
+                if (!positionValid) continue;
                 
                 usedPositions.push({ x: posX, y: posY });
                 
@@ -2709,7 +2653,6 @@
                     icon.innerHTML = `<i class="fas fa-${icons[Math.floor(Math.random() * icons.length)]}"></i>`;
                 }
                 
-                // Smaller icons on mobile
                 const size = isMobile ? (0.7 + Math.random() * 0.6) : (1 + Math.random() * 1.2);
                 const rotation = Math.random() * 360;
                 const opacity = isMobile ? (0.15 + Math.random() * 0.2) : (0.2 + Math.random() * 0.3);
@@ -2776,49 +2719,15 @@
         }
 
         // ===== SLIDESHOW =====
+        let slideshowInterval;
+        let currentSlide = 0;
+
         function initSlideshow() {
-            const slideshowContainer = document.getElementById('slideshowContainer');
-            if (!slideshowContainer) return;
-            
-            const slides = [
-                'homepageslideshow01.jpg',
-                'homepageslideshow02.jpg',
-                'homepageslideshow03.jpg',
-                'homepageslideshow04.jpg'
-            ];
-            
-            slideshowContainer.innerHTML = '';
-            
-            slides.forEach((slide, index) => {
-                const slideElement = document.createElement('div');
-                slideElement.className = `slide ${index === 0 ? 'active' : ''}`;
-                
-                const img = document.createElement('img');
-                img.src = slide;
-                img.alt = `Professional Photography ${index + 1}`;
-                img.loading = index === 0 ? "eager" : "lazy";
-                
-                img.onerror = function() {
-                    const isMobile = window.innerWidth <= 768;
-                    const placeholderHeight = isMobile ? '55vh' : '75vh';
-                    
-                    this.style.backgroundColor = '#f0f0f0';
-                    this.style.display = 'flex';
-                    this.style.alignItems = 'center';
-                    this.style.justifyContent = 'center';
-                    this.style.minHeight = placeholderHeight;
-                    this.innerHTML = `<div style="color: var(--accent); font-weight: bold; text-align: center; padding: 20px;">Slide ${index + 1}<br><small>Professional Photography</small></div>`;
-                };
-                
-                slideElement.appendChild(img);
-                slideshowContainer.appendChild(slideElement);
-            });
+            const slides = document.querySelectorAll('.slide');
+            if (slides.length === 0) return;
             
             startSlideshow();
         }
-
-        let slideshowInterval;
-        let currentSlide = 0;
 
         function startSlideshow() {
             if (slideshowInterval) clearInterval(slideshowInterval);
@@ -2895,7 +2804,6 @@
 
             clientsTrack.innerHTML = '';
             
-            // Duplicate the logos for seamless infinite scrolling
             for (let set = 0; set < 3; set++) {
                 clientLogos.forEach(filename => {
                     const logoItem = document.createElement('div');
@@ -2919,7 +2827,6 @@
                 });
             }
             
-            // Ensure animation runs
             setTimeout(() => {
                 const track = document.querySelector('.clients-track');
                 if (track) {
@@ -2935,7 +2842,6 @@
             const servicesContainer = document.getElementById('servicesContainer');
             if (!servicesContainer) return;
 
-            // Services in NEW ORDER as requested
             const services = [
                 {
                     id: 'food',
@@ -3084,7 +2990,6 @@
         }
 
         // ===== GALLERY - UPDATED ORDER =====
-        // Gallery categories in NEW ORDER as requested
         const galleryCategories = [
             { id: 'food', name: 'Food Photography', count: 15, icon: 'fa-utensils' },
             { id: 'product', name: 'Product Photography', count: 15, icon: 'fa-box-open' },
@@ -3107,14 +3012,13 @@
             'studio': 'studio shots'
         };
 
-        // ===== SIMPLE DROPDOWN MENU - UPDATED ORDER =====
+        // ===== SIMPLE DROPDOWN MENU =====
         function initSimpleDropdown() {
             const dropdownToggle = document.getElementById('galleryDropdownToggle');
             const dropdownMenu = document.getElementById('galleryDropdownMenu');
 
             if (!dropdownToggle || !dropdownMenu) return;
 
-            // Clear existing items
             dropdownMenu.innerHTML = '';
 
             galleryCategories.forEach(category => {
@@ -3162,7 +3066,7 @@
             });
         }
 
-        // ===== LOAD GALLERY SECTIONS - UPDATED ORDER =====
+        // ===== LOAD GALLERY SECTIONS =====
         function loadGallerySections() {
             const gallerySections = document.getElementById('gallerySections');
             if (!gallerySections) return;
@@ -3176,9 +3080,7 @@
                 
                 const header = document.createElement('div');
                 header.className = 'section-header';
-                header.innerHTML = `
-                    <h2>${category.name}</h2>
-                `;
+                header.innerHTML = `<h2>${category.name}</h2>`;
                 
                 const grid = document.createElement('div');
                 grid.className = 'gallery-grid';
@@ -3407,14 +3309,28 @@
                 isValid = false;
             }
 
+            // Phone number validation
+            if (phone.value.trim() && !validatePhone(phone.value)) {
+                highlightError(phone);
+                showFormStatus('error', 'Please enter a valid 10-digit phone number.');
+                isValid = false;
+            }
+
             if (!isValid) {
-                showFormStatus('error', 'Please fill in all required fields correctly (marked with *).');
+                if (!document.querySelector('.form-status.error')) {
+                    showFormStatus('error', 'Please fill in all required fields correctly (marked with *).');
+                }
                 setTimeout(() => {
                     document.getElementById('formStatus').style.display = 'none';
                 }, 5000);
             }
 
             return isValid;
+        }
+
+        function validatePhone(phone) {
+            const phoneRegex = /^[0-9]{10}$/;
+            return phoneRegex.test(phone.replace(/\D/g, ''));
         }
 
         function highlightError(field) {
@@ -3459,10 +3375,191 @@
             });
         }
 
-        // ===== RESIZE HANDLER =====
+        // ===== RESIZE HANDLER FOR BACKGROUND ICONS =====
+        let resizeTimeout;
         window.addEventListener('resize', () => {
-            setTimeout(initBackground, 250);
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                initBackground();
+                // Reinitialize slideshow for responsive images
+                const slides = document.querySelectorAll('.slide');
+                if (slides.length > 0) {
+                    slides.forEach(slide => {
+                        const img = slide.querySelector('img');
+                        if (img) {
+                            // Force browser to re-evaluate srcset
+                            const src = img.src;
+                            img.src = '';
+                            img.src = src;
+                        }
+                    });
+                }
+            }, 250);
         });
+
+        // ===== ERROR HANDLING FOR SLIDESHOW IMAGES =====
+        document.querySelectorAll('.slide img').forEach(img => {
+            img.addEventListener('error', function() {
+                console.warn(`Failed to load slideshow image: ${this.src}`);
+                
+                const isMobile = window.innerWidth <= 768;
+                const placeholderHeight = isMobile ? '55vh' : '75vh';
+                
+                this.style.backgroundColor = '#f0f0f0';
+                this.style.display = 'flex';
+                this.style.alignItems = 'center';
+                this.style.justifyContent = 'center';
+                this.style.minHeight = placeholderHeight;
+                this.innerHTML = `<div style="color: var(--accent); font-weight: bold; text-align: center; padding: 20px;">Professional Photography<br><small>PQ Studios Hyderabad</small></div>`;
+            });
+        });
+
+        // ===== IMPROVED TOUCH HANDLING FOR MOBILE =====
+        if ('ontouchstart' in window || navigator.maxTouchPoints) {
+            // Add touch-specific optimizations
+            const style = document.createElement('style');
+            style.textContent = `
+                @media (hover: none) and (pointer: coarse) {
+                    .btn:hover, .btn:focus {
+                        transform: none !important;
+                    }
+                    .service-card:hover {
+                        transform: none !important;
+                    }
+                    .featured-item:hover img {
+                        transform: none !important;
+                    }
+                    .nav-link:hover::after {
+                        width: 0 !important;
+                    }
+                    .client-logo-item:hover {
+                        transform: none !important;
+                    }
+                    .info-card:hover {
+                        transform: none !important;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // ===== LAZY LOADING OPTIMIZATION =====
+        if ('IntersectionObserver' in window) {
+            const lazyImageObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        }
+                        lazyImageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach((img) => {
+                lazyImageObserver.observe(img);
+            });
+        }
+
+        // ===== PRELOAD CRITICAL MOBILE IMAGES =====
+        if (window.innerWidth <= 768) {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = 'homepageslideshow_mobile_01.jpg';
+            link.fetchPriority = 'high';
+            document.head.appendChild(link);
+        }
+
+        // ===== SMOOTH SCROLLING FOR MOBILE =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#' || href === '#home') return;
+                
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    e.preventDefault();
+                    const headerHeight = 70;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ===== MOBILE PERFORMANCE OPTIMIZATION =====
+        window.addEventListener('load', () => {
+            // Check if all critical images loaded
+            const criticalImages = document.querySelectorAll('.slide.active img, .logo-image');
+            let imagesLoaded = 0;
+            
+            criticalImages.forEach(img => {
+                if (img.complete) {
+                    imagesLoaded++;
+                } else {
+                    img.addEventListener('load', () => {
+                        imagesLoaded++;
+                        if (imagesLoaded === criticalImages.length) {
+                            console.log('All critical images loaded successfully');
+                        }
+                    });
+                    img.addEventListener('error', () => {
+                        console.warn('Critical image failed to load:', img.src);
+                        imagesLoaded++;
+                    });
+                }
+            });
+        });
+
+        // ===== FALLBACK FOR OLD BROWSERS =====
+        // Add class for feature detection
+        document.documentElement.className += ' js-enabled';
+
+        // Polyfill for older browsers
+        if (!Element.prototype.closest) {
+            Element.prototype.closest = function(s) {
+                var el = this;
+                do {
+                    if (Element.prototype.matches.call(el, s)) return el;
+                    el = el.parentElement || el.parentNode;
+                } while (el !== null && el.nodeType === 1);
+                return null;
+            };
+        }
+
+        // ===== PERFORMANCE OPTIMIZATION =====
+        // Defer non-critical animations
+        requestAnimationFrame(() => {
+            document.body.classList.add('loaded');
+        });
+
+        // ===== PREVENT MULTIPLE FORM SUBMISSIONS =====
+        let isSubmitting = false;
+        const originalSubmit = contactForm ? contactForm.onsubmit : null;
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                if (isSubmitting) {
+                    e.preventDefault();
+                    return;
+                }
+                isSubmitting = true;
+                
+                // Re-enable after 3 seconds
+                setTimeout(() => {
+                    isSubmitting = false;
+                }, 3000);
+            });
+        }
     </script>
 </body>
 </html>
