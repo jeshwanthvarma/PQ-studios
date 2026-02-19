@@ -538,7 +538,7 @@
             opacity: 1;
         }
 
-        /* ===== SERVICE CARDS - WITH ALIGNED BUTTONS ===== */
+        /* ===== SERVICE CARDS ===== */
         .service-cards {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -641,7 +641,7 @@
             min-height: 48px;
         }
 
-        /* ===== GALLERY PAGE WITH LARGER DROPDOWN MENU ===== */
+        /* ===== GALLERY PAGE ===== */
         .gallery-header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: var(--white);
@@ -658,7 +658,6 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Portfolio Dropdown Menu - Larger button for desktop */
         .portfolio-dropdown-section {
             max-width: 600px;
             margin: 0 auto 40px;
@@ -678,7 +677,6 @@
             width: 100%;
         }
 
-        /* Desktop - Double the size */
         @media (min-width: 1024px) {
             .portfolio-dropdown-btn {
                 padding: 32px 40px !important;
@@ -699,7 +697,6 @@
             }
         }
 
-        /* Mobile - Normal size */
         .portfolio-dropdown-btn {
             width: 100%;
             padding: 16px 20px;
@@ -778,13 +775,6 @@
         .portfolio-dropdown-item.active {
             background: var(--accent);
             color: var(--white);
-        }
-
-        @media (max-width: 768px) {
-            .portfolio-dropdown-section {
-                max-width: 100%;
-                padding: 0 15px;
-            }
         }
 
         .gallery-grid {
@@ -1309,7 +1299,7 @@
             box-shadow: 0 10px 25px rgba(70, 130, 180, 0.3);
         }
 
-        /* ===== IMPROVED FOOTER WITH DROPDOWNS ===== */
+        /* ===== FOOTER ===== */
         .footer {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: var(--white);
@@ -1371,7 +1361,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Footer Contact Info */
         .contact-info {
             margin: 1.5rem 0;
         }
@@ -1400,7 +1389,6 @@
             color: var(--accent-light);
         }
 
-        /* Social Links */
         .social-links {
             display: flex;
             gap: 12px;
@@ -1429,7 +1417,6 @@
             border-color: var(--accent);
         }
 
-        /* Footer Dropdown Styles */
         .footer-dropdown {
             margin-bottom: 20px;
         }
@@ -1499,7 +1486,6 @@
             font-size: 0.9rem;
         }
 
-        /* Quick Links */
         .quick-link-item {
             display: flex;
             align-items: center;
@@ -1687,7 +1673,7 @@
             </section>
         </div>
 
-        <!-- Gallery Page with Larger Dropdown Menu -->
+        <!-- Gallery Page -->
         <div id="gallery-page" class="page">
             <div class="gallery-header">
                 <div class="container">
@@ -1696,7 +1682,6 @@
                 </div>
             </div>
 
-            <!-- Portfolio Dropdown Menu - Larger button for desktop -->
             <div class="portfolio-dropdown-section">
                 <div class="portfolio-dropdown-label">Select Portfolio Category</div>
                 <div class="portfolio-dropdown">
@@ -1784,7 +1769,6 @@
                         </div>
                     </div>
 
-                    <!-- Reviews Section -->
                     <div class="reviews-section">
                         <div class="container">
                             <h2 class="text-center">Client <span class="text-accent">Testimonials</span></h2>
@@ -1805,7 +1789,6 @@
                         </div>
                     </div>
 
-                    <!-- Final CTA -->
                     <div class="text-center mt-4">
                         <h3>Ready to Create Something Beautiful?</h3>
                         <a href="#contact" class="btn btn-primary mt-3" onclick="event.preventDefault(); showPage('contact');">Schedule Consultation</a>
@@ -1876,7 +1859,7 @@
         </div>
     </div>
 
-    <!-- IMPROVED FOOTER WITH DROPDOWNS AND ALL SERVICES -->
+    <!-- FOOTER WITH UPDATED SERVICE LINKS -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -1916,30 +1899,30 @@
                 <div>
                     <h3>All Services</h3>
                     
-                    <!-- Core Services Dropdown -->
+                    <!-- Core Services Dropdown - These go to services page sections -->
                     <div class="footer-dropdown" id="coreServicesDropdown">
                         <div class="dropdown-header" onclick="toggleDropdown('coreServicesMenu')">
                             <span><i class="fas fa-camera" style="margin-right: 10px;"></i> Core Photography</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="dropdown-menu" id="coreServicesMenu">
-                            <div class="dropdown-item" onclick="goToService('food')"><i class="fas fa-utensils"></i> Food Photography</div>
-                            <div class="dropdown-item" onclick="goToService('product')"><i class="fas fa-box"></i> Product Photography</div>
-                            <div class="dropdown-item" onclick="goToService('fashion')"><i class="fas fa-tshirt"></i> Fashion Photography</div>
-                            <div class="dropdown-item" onclick="goToService('pets')"><i class="fas fa-paw"></i> Pet Photography</div>
-                            <div class="dropdown-item" onclick="goToService('brand')"><i class="fas fa-briefcase"></i> Brand Portfolios</div>
-                            <div class="dropdown-item" onclick="goToService('interiors')"><i class="fas fa-building"></i> Architectural Photography</div>
+                            <div class="dropdown-item" onclick="goToServiceSection('food')"><i class="fas fa-utensils"></i> Food Photography</div>
+                            <div class="dropdown-item" onclick="goToServiceSection('product')"><i class="fas fa-box"></i> Product Photography</div>
+                            <div class="dropdown-item" onclick="goToServiceSection('fashion')"><i class="fas fa-tshirt"></i> Fashion Photography</div>
+                            <div class="dropdown-item" onclick="goToServiceSection('pets')"><i class="fas fa-paw"></i> Pet Photography</div>
+                            <div class="dropdown-item" onclick="goToServiceSection('brand')"><i class="fas fa-briefcase"></i> Brand Portfolios</div>
+                            <div class="dropdown-item" onclick="goToServiceSection('interiors')"><i class="fas fa-building"></i> Architectural Photography</div>
                         </div>
                     </div>
                     
-                    <!-- Commercial Services Dropdown -->
+                    <!-- Commercial Services Dropdown - These go to contact page -->
                     <div class="footer-dropdown" id="commercialServicesDropdown">
                         <div class="dropdown-header" onclick="toggleDropdown('commercialServicesMenu')">
                             <span><i class="fas fa-briefcase" style="margin-right: 10px;"></i> Commercial</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="dropdown-menu" id="commercialServicesMenu">
-                            <div class="dropdown-item" onclick="goToService('ecommerce')"><i class="fas fa-shopping-cart"></i> E-Commerce Visuals</div>
+                            <div class="dropdown-item" onclick="goToServiceSection('ecommerce')"><i class="fas fa-shopping-cart"></i> E-Commerce Visuals</div>
                             <div class="dropdown-item" onclick="goToService('corporate')"><i class="fas fa-building"></i> Corporate Photography</div>
                             <div class="dropdown-item" onclick="goToService('real-estate')"><i class="fas fa-home"></i> Real Estate</div>
                             <div class="dropdown-item" onclick="goToService('drone')"><i class="fas fa-helicopter"></i> Aerial & Drone</div>
@@ -1947,14 +1930,14 @@
                         </div>
                     </div>
                     
-                    <!-- Special Services Dropdown -->
+                    <!-- Special Services Dropdown - These go to services page sections (Studio Rentals) or contact page -->
                     <div class="footer-dropdown" id="specialServicesDropdown">
                         <div class="dropdown-header" onclick="toggleDropdown('specialServicesMenu')">
                             <span><i class="fas fa-star" style="margin-right: 10px;"></i> Specialized</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="dropdown-menu" id="specialServicesMenu">
-                            <div class="dropdown-item" onclick="goToService('studio')"><i class="fas fa-camera-retro"></i> Studio Rentals</div>
+                            <div class="dropdown-item" onclick="goToServiceSection('studio')"><i class="fas fa-camera-retro"></i> Studio Rentals</div>
                             <div class="dropdown-item" onclick="goToService('portrait')"><i class="fas fa-user"></i> Portrait Photography</div>
                             <div class="dropdown-item" onclick="goToService('consultation')"><i class="fas fa-users"></i> Photography Consultation</div>
                             <div class="dropdown-item" onclick="goToService('workshop')"><i class="fas fa-chalkboard-teacher"></i> Workshops & Training</div>
@@ -1973,8 +1956,8 @@
                     
                     <h3 style="margin-top: 30px;">Popular</h3>
                     <div class="quick-link-item" onclick="goToService('wedding')"><i class="fas fa-heart"></i> Wedding Photography</div>
-                    <div class="quick-link-item" onclick="goToService('food')"><i class="fas fa-utensils"></i> Food Photography</div>
-                    <div class="quick-link-item" onclick="goToService('product')"><i class="fas fa-box"></i> Product Photography</div>
+                    <div class="quick-link-item" onclick="goToServiceSection('food')"><i class="fas fa-utensils"></i> Food Photography</div>
+                    <div class="quick-link-item" onclick="goToServiceSection('product')"><i class="fas fa-box"></i> Product Photography</div>
                 </div>
             </div>
             
@@ -2126,7 +2109,7 @@
             `).join('');
         }
 
-        // ===== SERVICES WITH ALIGNED BUTTONS =====
+        // ===== SERVICES WITH BUTTONS =====
         function loadServices() {
             const container = document.getElementById('servicesContainer');
             if (!container) return;
@@ -2196,11 +2179,71 @@
                         ${service.pricing ? `<div class="price-tag">${service.pricing}</div>` : ''}
                         <div class="service-card-buttons">
                             <button class="btn btn-primary btn-sm" onclick="goToService('${service.id}')">Inquire</button>
-                            <button class="btn btn-outline btn-sm" onclick="showPage('gallery')">Portfolio</button>
+                            <button class="btn btn-outline btn-sm" onclick="goToPortfolio('${service.id}')">Portfolio</button>
                         </div>
                     </div>
                 `;
             }).join('');
+        }
+
+        // ===== NAVIGATION FUNCTIONS =====
+        function goToService(serviceId) {
+            localStorage.setItem('selectedService', serviceId);
+            showPage('contact');
+            
+            setTimeout(() => {
+                const serviceSelect = document.getElementById('serviceSelect');
+                if (serviceSelect) {
+                    serviceSelect.value = serviceId;
+                }
+            }, 100);
+        }
+
+        function goToPortfolio(serviceId) {
+            showPage('gallery');
+            
+            setTimeout(() => {
+                const categoryMap = {
+                    'food': 'food',
+                    'product': 'product',
+                    'fashion': 'fashion',
+                    'pets': 'pets',
+                    'brand': 'brand',
+                    'interiors': 'interiors',
+                    'ecommerce': 'ecommerce',
+                    'studio': 'studio'
+                };
+                
+                const categoryId = categoryMap[serviceId] || serviceId;
+                scrollToCategory(categoryId);
+            }, 200);
+        }
+
+        // NEW FUNCTION: Go to service section on services page
+        function goToServiceSection(serviceId) {
+            showPage('services');
+            
+            setTimeout(() => {
+                const serviceCard = document.querySelector(`.service-card[data-service="${serviceId}"]`);
+                if (serviceCard) {
+                    const headerHeight = 70;
+                    const elementPosition = serviceCard.getBoundingClientRect().top + window.scrollY;
+                    const offsetPosition = elementPosition - headerHeight - 20;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    serviceCard.style.border = '2px solid var(--accent)';
+                    serviceCard.style.boxShadow = '0 0 20px rgba(70, 130, 180, 0.3)';
+                    
+                    setTimeout(() => {
+                        serviceCard.style.border = '1px solid rgba(70, 130, 180, 0.1)';
+                        serviceCard.style.boxShadow = 'var(--shadow-lg)';
+                    }, 2000);
+                }
+            }, 100);
         }
 
         // ===== GALLERY CATEGORIES =====
@@ -2221,14 +2264,12 @@
             
             if (!dropdownBtn || !dropdownMenu) return;
 
-            // Toggle dropdown on click
             dropdownBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 dropdownBtn.classList.toggle('active');
                 dropdownMenu.classList.toggle('show');
             });
 
-            // Close dropdown when clicking outside
             document.addEventListener('click', (e) => {
                 if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
                     dropdownBtn.classList.remove('active');
@@ -2236,7 +2277,6 @@
                 }
             });
 
-            // Update button text when item is clicked
             const dropdownItems = dropdownMenu.querySelectorAll('.portfolio-dropdown-item');
             dropdownItems.forEach(item => {
                 item.addEventListener('click', function() {
@@ -2293,7 +2333,7 @@
         function scrollToCategory(categoryId) {
             const element = document.getElementById(`cat-${categoryId}`);
             if (element) {
-                const headerHeight = 70; // Account for fixed header
+                const headerHeight = 70;
                 const dropdownSection = document.querySelector('.portfolio-dropdown-section');
                 const dropdownHeight = dropdownSection ? dropdownSection.offsetHeight : 0;
                 const totalOffset = headerHeight + dropdownHeight + 20;
@@ -2456,26 +2496,6 @@
             if (savedService) {
                 select.value = savedService;
                 localStorage.removeItem('selectedService');
-            }
-        }
-
-        function goToService(serviceId) {
-            localStorage.setItem('selectedService', serviceId);
-            
-            const coreServices = ['food', 'product', 'fashion', 'pets', 'brand', 'interiors', 'ecommerce', 'studio', 'wedding', 'portrait', 'commercial'];
-            
-            if (coreServices.includes(serviceId)) {
-                showPage('services');
-                setTimeout(() => {
-                    const card = document.querySelector(`.service-card[data-service="${serviceId}"]`);
-                    if (card) {
-                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        card.style.border = '2px solid var(--accent)';
-                        setTimeout(() => card.style.border = '1px solid rgba(70, 130, 180, 0.1)', 2000);
-                    }
-                }, 100);
-            } else {
-                showPage('contact');
             }
         }
 
