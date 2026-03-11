@@ -566,7 +566,7 @@
             opacity: 1;
         }
 
-        /* ===== SERVICE CARDS ===== */
+        /* ===== IMPROVED SERVICE CARDS WITH BETTER TEXT VISIBILITY ===== */
         .service-cards {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -594,13 +594,13 @@
 
         .service-card {
             position: relative;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
             border-radius: var(--radius-lg);
             padding: 2rem;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-lg);
             transition: var(--transition);
-            border: 1px solid rgba(70, 130, 180, 0.08);
+            border: 1px solid rgba(70, 130, 180, 0.15);
             display: flex;
             flex-direction: column;
             height: 100%;
@@ -617,14 +617,35 @@
             bottom: 0;
             background-size: cover;
             background-position: center;
-            opacity: 0.15;
+            opacity: 0.2;
             z-index: -1;
             transition: opacity 0.5s ease;
             border-radius: var(--radius-lg);
         }
 
+        /* Darker overlay for better text contrast */
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 100%);
+            z-index: -1;
+            border-radius: var(--radius-lg);
+            pointer-events: none;
+        }
+
         .service-card:hover::before {
-            opacity: 0.25;
+            opacity: 0.3;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.9);
         }
 
         .service-card[data-service="food"]::before { background-image: url('food photography 1.jpg'); }
@@ -635,12 +656,6 @@
         .service-card[data-service="interiors"]::before { background-image: url('interiors architecture 1.jpg'); }
         .service-card[data-service="ecommerce"]::before { background-image: url('ecommerce visuals 1.jpg'); }
         .service-card[data-service="studio"]::before { background-image: url('studio shots 1.jpg'); }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(70, 130, 180, 0.2);
-        }
 
         .service-icon {
             width: 60px;
@@ -653,9 +668,17 @@
             margin-bottom: 1.5rem;
             color: var(--white);
             font-size: 1.5rem;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
             position: relative;
             z-index: 2;
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.5);
         }
 
         .service-features {
@@ -671,13 +694,16 @@
             align-items: center;
             gap: 0.75rem;
             margin-bottom: 0.75rem;
-            color: var(--gray);
+            color: var(--gray-dark);
             font-size: 0.95rem;
+            font-weight: 500;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.5);
         }
 
         .service-features i {
             color: var(--accent);
             font-size: 0.8rem;
+            filter: drop-shadow(0 1px 1px rgba(255,255,255,0.5));
         }
 
         .price-tag {
@@ -692,6 +718,7 @@
             align-self: flex-start;
             position: relative;
             z-index: 2;
+            box-shadow: var(--shadow-md);
         }
 
         .service-card-buttons {
@@ -707,6 +734,8 @@
             padding: 0.7rem;
             font-size: 0.9rem;
             min-height: 44px;
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
         }
 
         /* ===== PORTFOLIO DROPDOWN ===== */
@@ -1304,6 +1333,7 @@
             gap: 25px;
         }
 
+        /* Contact Info Card - Hidden on Mobile */
         .contact-info-card {
             background: var(--white);
             border-radius: var(--radius-lg);
@@ -1311,6 +1341,12 @@
             box-shadow: var(--shadow-lg);
             border: 1px solid rgba(70, 130, 180, 0.08);
             text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .contact-info-card {
+                display: none;
+            }
         }
 
         .contact-info-card h3 {
@@ -1474,7 +1510,7 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        /* ===== FOOTER ===== */
+        /* ===== UPDATED FOOTER WITH SWAPPED SECTIONS ===== */
         .footer {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: var(--white);
@@ -1496,7 +1532,7 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 2fr 1.5fr;
+            grid-template-columns: 2fr 1.5fr 2fr;
             gap: 40px;
             margin-bottom: 40px;
         }
@@ -1762,19 +1798,18 @@
                 padding: 40px 0;
             }
             
-            .contact-form-container,
-            .contact-info-card,
-            .whatsapp-card {
+            .contact-form-container {
                 padding: 1.5rem;
             }
             
-            .contact-detail-item {
-                padding: 0.8rem;
+            .whatsapp-card {
+                padding: 1.5rem;
             }
             
             .whatsapp-card .btn-whatsapp {
                 padding: 0.9rem 1.5rem;
                 font-size: 1rem;
+                max-width: 100%;
             }
             
             .whatsapp-features {
@@ -1904,8 +1939,8 @@
                 <div class="container">
                     <div class="hero-content">
                         <div class="hero-buttons">
-                            <a href="#services" class="btn btn-primary" onclick="event.preventDefault(); showPage('services');">Explore Services</a>
-                            <a href="#contact" class="btn btn-outline-light" onclick="event.preventDefault(); showPage('contact');">Book Consultation</a>
+                          <!--   <a href="#services" class="btn btn-primary" onclick="event.preventDefault(); showPage('services');">Explore Services</a>
+                            <a href="#contact" class="btn btn-outline-light" onclick="event.preventDefault(); showPage('contact');">Book Consultation</a> -->
                         </div>
                     </div>
                 </div>
@@ -2068,7 +2103,7 @@
             </section>
         </div>
 
-        <!-- IMPROVED CONTACT PAGE -->
+        <!-- IMPROVED CONTACT PAGE - Contact Info Box Hidden on Mobile -->
         <div id="contact-page" class="page">
             <div class="contact-hero">
                 <div class="container">
@@ -2123,7 +2158,7 @@
 
                         <!-- Contact Info & WhatsApp Card Sidebar -->
                         <div class="contact-info-sidebar">
-                            <!-- Contact Information Card -->
+                            <!-- Contact Information Card - Hidden on Mobile -->
                             <div class="contact-info-card">
                                 <h3>Contact Information</h3>
                                 
@@ -2170,7 +2205,7 @@
                                 </div>
                             </div>
 
-                            <!-- Improved WhatsApp Card -->
+                            <!-- Improved WhatsApp Card - Visible on both Desktop and Mobile -->
                             <div class="whatsapp-card">
                                 <h3>Quick Response on WhatsApp</h3>
                                 <p>Get instant answers to your queries within minutes</p>
@@ -2202,10 +2237,11 @@
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- UPDATED FOOTER - Swapped Quick Links (now Key Services) and All Services -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
+                <!-- Column 1: Company Info (unchanged) -->
                 <div>
                     <h3>PQ Studios</h3>
                     <p>Premier photography studio in Hyderabad delivering exceptional visual storytelling through masterful photography and artistic excellence.</p>
@@ -2237,6 +2273,22 @@
                     </div>
                 </div>
                 
+                <!-- Column 2: Key Services (formerly Quick Links) - Now in middle -->
+                <div>
+                    <h3>Key Services</h3>
+                    <div class="quick-link-item" onclick="goToServiceSection('food')"><i class="fas fa-utensils"></i> Food Photography</div>
+                    <div class="quick-link-item" onclick="goToServiceSection('product')"><i class="fas fa-box"></i> Product Photography</div>
+                    <div class="quick-link-item" onclick="goToServiceSection('fashion')"><i class="fas fa-tshirt"></i> Fashion Photography</div>
+                    <div class="quick-link-item" onclick="goToServiceSection('pets')"><i class="fas fa-paw"></i> Pet Photography</div>
+                    <div class="quick-link-item" onclick="goToServiceSection('ecommerce')"><i class="fas fa-shopping-cart"></i> E-Commerce</div>
+                    <div class="quick-link-item" onclick="goToServiceSection('studio')"><i class="fas fa-camera"></i> Studio Rentals</div>
+                    
+                    <h3 style="margin-top: 25px;">Popular</h3>
+                    <div class="quick-link-item" onclick="goToService('wedding')"><i class="fas fa-heart"></i> Wedding Photography</div>
+                    <div class="quick-link-item" onclick="goToServiceSection('interiors')"><i class="fas fa-building"></i> Architecture</div>
+                </div>
+                
+                <!-- Column 3: All Services (now with dropdowns) - Moved from middle to end -->
                 <div>
                     <h3>All Services</h3>
                     
@@ -2281,20 +2333,6 @@
                             <div class="dropdown-item" onclick="goToService('workshop')"><i class="fas fa-chalkboard-teacher"></i> Workshops & Training</div>
                         </div>
                     </div>
-                </div>
-                
-                <div>
-                    <h3>Quick Links</h3>
-                    <div class="quick-link-item" onclick="showPage('home')"><i class="fas fa-home"></i> Home</div>
-                    <div class="quick-link-item" onclick="showPage('services')"><i class="fas fa-camera"></i> Services</div>
-                    <div class="quick-link-item" onclick="showPage('gallery')"><i class="fas fa-images"></i> Portfolio</div>
-                    <div class="quick-link-item" onclick="showPage('about')"><i class="fas fa-user"></i> About Us</div>
-                    <div class="quick-link-item" onclick="showPage('contact')"><i class="fas fa-envelope"></i> Contact</div>
-                    
-                    <h3 style="margin-top: 25px;">Popular</h3>
-                    <div class="quick-link-item" onclick="goToService('wedding')"><i class="fas fa-heart"></i> Wedding Photography</div>
-                    <div class="quick-link-item" onclick="goToServiceSection('food')"><i class="fas fa-utensils"></i> Food Photography</div>
-                    <div class="quick-link-item" onclick="goToServiceSection('product')"><i class="fas fa-box"></i> Product Photography</div>
                 </div>
             </div>
             
