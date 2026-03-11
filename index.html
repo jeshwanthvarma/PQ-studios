@@ -49,6 +49,65 @@
             line-height: 1.6;
             background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
             overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ===== ANIMATED BACKGROUND ELEMENTS (CAMERAS, LENSES, LIGHTS) ===== */
+        .bg-decor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .decor-item {
+            position: absolute;
+            opacity: 0.12;
+            color: #4682b4;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            animation: floatSoft 18s infinite ease-in-out;
+            font-size: 2.5rem;
+            user-select: none;
+        }
+
+        .decor-item i { 
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); 
+        }
+
+        /* Positioning each item uniquely */
+        .decor-item:nth-child(1) { top: 10%; left: 3%; animation-duration: 15s; }
+        .decor-item:nth-child(2) { top: 70%; left: 6%; animation-duration: 20s; font-size: 3rem; }
+        .decor-item:nth-child(3) { bottom: 10%; right: 5%; animation-duration: 16s; }
+        .decor-item:nth-child(4) { top: 25%; right: 8%; animation-duration: 22s; font-size: 3.5rem; }
+        .decor-item:nth-child(5) { top: 80%; left: 20%; animation-duration: 17s; }
+        .decor-item:nth-child(6) { top: 15%; right: 25%; animation-duration: 19s; font-size: 2.2rem; }
+        .decor-item:nth-child(7) { bottom: 25%; left: 12%; animation-duration: 21s; }
+        .decor-item:nth-child(8) { top: 45%; left: 35%; animation-duration: 18s; }
+        .decor-item:nth-child(9) { bottom: 15%; right: 18%; animation-duration: 20s; }
+        .decor-item:nth-child(10) { top: 88%; left: 75%; animation-duration: 18s; font-size: 2.8rem; }
+
+        /* Floating animation */
+        @keyframes floatSoft {
+            0% { 
+                transform: translateY(0px) rotate(0deg); 
+            }
+            50% { 
+                transform: translateY(-12px) rotate(2deg); 
+            }
+            100% { 
+                transform: translateY(0px) rotate(0deg); 
+            }
+        }
+
+        /* Ensure content appears above background */
+        .page-content, .header, .footer, .gallery-modal, .back-to-top {
+            position: relative;
+            z-index: 5;
         }
 
         /* ===== TYPOGRAPHY ===== */
@@ -92,6 +151,30 @@
 
         @media (max-width: 768px) {
             .section { padding: 50px 0; }
+        }
+
+        /* ===== FULL SCREEN DESKTOP ENHANCEMENT ===== */
+        @media (min-width: 1440px) {
+            .container {
+                max-width: 90%;
+                padding: 0 60px;
+            }
+            
+            .hero {
+                min-height: 85vh;
+            }
+            
+            .service-cards {
+                gap: 30px;
+            }
+            
+            .service-card {
+                padding: 2.5rem;
+            }
+            
+            .gallery-grid {
+                gap: 20px;
+            }
         }
 
         /* ===== BUTTONS ===== */
@@ -149,6 +232,10 @@
             padding: 0.7rem 1.5rem;
             font-size: 0.9rem;
             min-height: 44px;
+        }
+
+        .btn-block {
+            width: 100%;
         }
 
         /* ===== HEADER ===== */
@@ -498,7 +585,7 @@
             opacity: 1;
         }
 
-        /* ===== SERVICE CARDS ===== */
+        /* ===== SERVICE CARDS WITH BACKGROUND IMAGES ===== */
         .service-cards {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -525,7 +612,9 @@
         }
 
         .service-card {
-            background: var(--white);
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-radius: var(--radius-lg);
             padding: 2rem;
             box-shadow: var(--shadow-md);
@@ -534,7 +623,42 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            overflow: hidden;
+            z-index: 1;
         }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: -1;
+            transition: opacity 0.5s ease;
+            border-radius: var(--radius-lg);
+        }
+
+        .service-card:hover::before {
+            opacity: 0.25;
+        }
+
+        .service-card[data-service="food"]::before { background-image: url('food photography 1.jpg'); }
+        .service-card[data-service="product"]::before { background-image: url('product photography 1.jpg'); }
+        .service-card[data-service="fashion"]::before { background-image: url('fashion lifestyle 1.jpg'); }
+        .service-card[data-service="pets"]::before { background-image: url('pet photography 1.jpg'); }
+        .service-card[data-service="brand"]::before { background-image: url('brand portfolios 1.jpg'); }
+        .service-card[data-service="interiors"]::before { background-image: url('interiors architecture 1.jpg'); }
+        .service-card[data-service="ecommerce"]::before { background-image: url('ecommerce visuals 1.jpg'); }
+        .service-card[data-service="studio"]::before { background-image: url('studio shots 1.jpg'); }
+        .service-card[data-service="corporate"]::before { background-image: url('corporate photography 1.jpg'); }
+        .service-card[data-service="real-estate"]::before { background-image: url('real estate photography 1.jpg'); }
+        .service-card[data-service="drone"]::before { background-image: url('drone photography 1.jpg'); }
+        .service-card[data-service="wedding"]::before { background-image: url('wedding photography 1.jpg'); }
+        .service-card[data-service="portrait"]::before { background-image: url('portrait photography 1.jpg'); }
 
         .service-card:hover {
             transform: translateY(-5px);
@@ -554,12 +678,16 @@
             color: var(--white);
             font-size: 1.5rem;
             box-shadow: var(--shadow-sm);
+            position: relative;
+            z-index: 2;
         }
 
         .service-features {
             list-style: none;
             margin: 1.5rem 0;
             flex-grow: 1;
+            position: relative;
+            z-index: 2;
         }
 
         .service-features li {
@@ -586,12 +714,16 @@
             font-size: 1rem;
             margin: 1rem 0;
             align-self: flex-start;
+            position: relative;
+            z-index: 2;
         }
 
         .service-card-buttons {
             display: flex;
             gap: 10px;
             margin-top: 1rem;
+            position: relative;
+            z-index: 2;
         }
 
         .service-card-buttons .btn {
@@ -703,14 +835,6 @@
             background: rgba(70, 130, 180, 0.05);
             color: var(--accent);
             font-weight: 500;
-        }
-
-        /* Remove desktop double size styles */
-        @media (min-width: 1024px) {
-            .portfolio-dropdown-btn {
-                padding: 14px 22px !important;
-                font-size: 1rem !important;
-            }
         }
 
         /* ===== GALLERY ===== */
@@ -1219,6 +1343,7 @@
             padding: 50px 0 30px;
             margin-top: 50px;
             position: relative;
+            z-index: 5;
         }
 
         .footer::before {
@@ -1466,9 +1591,94 @@
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(70, 130, 180, 0.3);
         }
+
+        /* ===== MOBILE VIEW FIXES ===== */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 60vh;
+            }
+            
+            .hero-content {
+                padding: 1rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .service-card {
+                padding: 1.5rem;
+            }
+            
+            .service-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .gallery-header {
+                padding: 30px 0;
+            }
+            
+            .contact-form-container {
+                padding: 1.5rem;
+            }
+            
+            .whatsapp-cta {
+                padding: 1.5rem;
+            }
+            
+            .back-to-top {
+                bottom: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+            }
+            
+            .service-card-buttons {
+                flex-direction: column;
+            }
+            
+            .footer-grid {
+                gap: 20px;
+            }
+            
+            .portfolio-dropdown-section {
+                margin: -10px auto 30px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Animated Background Decor -->
+    <div class="bg-decor">
+        <div class="decor-item"><i class="fas fa-camera-retro"></i></div>
+        <div class="decor-item"><i class="fas fa-lightbulb"></i></div>
+        <div class="decor-item"><i class="fas fa-video"></i></div>
+        <div class="decor-item"><i class="fas fa-camera"></i></div>
+        <div class="decor-item"><i class="fas fa-film"></i></div>
+        <div class="decor-item"><i class="fas fa-circle-notch"></i></div>
+        <div class="decor-item"><i class="fas fa-adjust"></i></div>
+        <div class="decor-item"><i class="fas fa-sun"></i></div>
+        <div class="decor-item"><i class="fas fa-cog"></i></div>
+        <div class="decor-item"><i class="fas fa-moon"></i></div>
+    </div>
+
     <!-- Gallery Modal -->
     <div class="gallery-modal" id="galleryModal">
         <div class="modal-content">
@@ -1535,8 +1745,6 @@
                 
                 <div class="container">
                     <div class="hero-content">
-                        <h1>PQ Studios <span class="text-accent">Hyderabad</span></h1>
-                        <p>Professional photography studio delivering exceptional visual narratives through masterful artistry and technical precision.</p>
                         <div class="hero-buttons">
                             <a href="#services" class="btn btn-primary" onclick="event.preventDefault(); showPage('services');">Explore Services</a>
                             <a href="#contact" class="btn btn-outline-light" onclick="event.preventDefault(); showPage('contact');">Book Consultation</a>
